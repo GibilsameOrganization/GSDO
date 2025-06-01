@@ -1,0 +1,105 @@
+
+import { Heart, Users, Megaphone, DollarSign, Mail } from "lucide-react";
+
+const GetInvolvedSection = () => {
+  const ways = [
+    {
+      icon: DollarSign,
+      title: "Donate",
+      description: "Your contribution directly funds life-changing programs in communities worldwide.",
+      action: "Give Today",
+      color: "bg-green-50 border-green-200 hover:bg-green-100"
+    },
+    {
+      icon: Heart,
+      title: "Volunteer",
+      description: "Join our global network of volunteers making a difference in local and international projects.",
+      action: "Join Us",
+      color: "bg-red-50 border-red-200 hover:bg-red-100"
+    },
+    {
+      icon: Users,
+      title: "Partner",
+      description: "Collaborate with us as an organization, business, or institution to amplify our impact.",
+      action: "Partner With Us",
+      color: "bg-blue-50 border-blue-200 hover:bg-blue-100"
+    },
+    {
+      icon: Megaphone,
+      title: "Advocate",
+      description: "Raise awareness and speak up for social justice and sustainable development in your community.",
+      action: "Spread the Word",
+      color: "bg-purple-50 border-purple-200 hover:bg-purple-100"
+    },
+    {
+      icon: Mail,
+      title: "Stay Informed",
+      description: "Subscribe to our newsletter for updates on our work and ways to get involved.",
+      action: "Subscribe",
+      color: "bg-yellow-50 border-yellow-200 hover:bg-yellow-100"
+    }
+  ];
+
+  return (
+    <section className="py-16 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gsdo-black mb-4">
+            How You Can Help
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Every action matters. Choose how you want to be part of the solution and help create lasting change.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {ways.map((way, index) => {
+            const IconComponent = way.icon;
+            return (
+              <div
+                key={way.title}
+                className={`p-6 rounded-lg border-2 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg animate-fade-in ${way.color}`}
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <div className="flex items-center mb-4">
+                  <div className="w-12 h-12 bg-royal-blue rounded-lg flex items-center justify-center mr-4">
+                    <IconComponent size={24} className="text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gsdo-black">
+                    {way.title}
+                  </h3>
+                </div>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  {way.description}
+                </p>
+                <button className="w-full bg-royal-blue hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors">
+                  {way.action}
+                </button>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Call to Action Banner */}
+        <div className="mt-16 bg-gradient-to-r from-royal-blue to-blue-700 rounded-lg p-8 md:p-12 text-center text-white">
+          <h3 className="text-2xl md:text-3xl font-bold mb-4">
+            Join the Movement for Global Sustainability
+          </h3>
+          <p className="text-xl mb-8 text-blue-100 max-w-3xl mx-auto">
+            Together, we can build a world where everyone has the opportunity to thrive. Your support makes the difference.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button className="bg-white text-royal-blue hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors">
+              Donate Now
+            </button>
+            <button className="border-2 border-white text-white hover:bg-white hover:text-royal-blue px-8 py-3 rounded-lg font-semibold transition-colors">
+              Learn More
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default GetInvolvedSection;

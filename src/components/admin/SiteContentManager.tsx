@@ -68,7 +68,7 @@ const SiteContentManager = () => {
 
     const contentData = {
       section_key: 'who_we_are',
-      content: formData,
+      content: formData as any, // Cast to any to satisfy Json type
       updated_by: user?.id,
     };
 

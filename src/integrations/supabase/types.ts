@@ -9,13 +9,213 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      hero_slides: {
+        Row: {
+          active: boolean | null
+          created_at: string | null
+          id: string
+          image_url: string
+          order_index: number
+          subtitle: string
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string | null
+          id?: string
+          image_url: string
+          order_index?: number
+          subtitle: string
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string | null
+          id?: string
+          image_url?: string
+          order_index?: number
+          subtitle?: string
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      impact_metrics: {
+        Row: {
+          active: boolean | null
+          description: string | null
+          id: string
+          label: string
+          metric_key: string
+          order_index: number | null
+          updated_at: string | null
+          value: number
+        }
+        Insert: {
+          active?: boolean | null
+          description?: string | null
+          id?: string
+          label: string
+          metric_key: string
+          order_index?: number | null
+          updated_at?: string | null
+          value: number
+        }
+        Update: {
+          active?: boolean | null
+          description?: string | null
+          id?: string
+          label?: string
+          metric_key?: string
+          order_index?: number | null
+          updated_at?: string | null
+          value?: number
+        }
+        Relationships: []
+      }
+      news_articles: {
+        Row: {
+          author_id: string | null
+          category: string | null
+          content: string
+          created_at: string | null
+          excerpt: string | null
+          id: string
+          image_url: string | null
+          published_date: string | null
+          status: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          author_id?: string | null
+          category?: string | null
+          content: string
+          created_at?: string | null
+          excerpt?: string | null
+          id?: string
+          image_url?: string | null
+          published_date?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          author_id?: string | null
+          category?: string | null
+          content?: string
+          created_at?: string | null
+          excerpt?: string | null
+          id?: string
+          image_url?: string | null
+          published_date?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          email: string | null
+          full_name: string | null
+          id: string
+          role: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id: string
+          role?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          role?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      site_content: {
+        Row: {
+          content: Json
+          id: string
+          last_updated: string | null
+          section_key: string
+          updated_by: string | null
+        }
+        Insert: {
+          content: Json
+          id?: string
+          last_updated?: string | null
+          section_key: string
+          updated_by?: string | null
+        }
+        Update: {
+          content?: Json
+          id?: string
+          last_updated?: string | null
+          section_key?: string
+          updated_by?: string | null
+        }
+        Relationships: []
+      }
+      stories: {
+        Row: {
+          active: boolean | null
+          created_at: string | null
+          excerpt: string
+          id: string
+          image_url: string
+          impact: string
+          location: string
+          order_index: number | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          active?: boolean | null
+          created_at?: string | null
+          excerpt: string
+          id?: string
+          image_url: string
+          impact: string
+          location: string
+          order_index?: number | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          active?: boolean | null
+          created_at?: string | null
+          excerpt?: string
+          id?: string
+          image_url?: string
+          impact?: string
+          location?: string
+          order_index?: number | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_admin: {
+        Args: { user_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       [_ in never]: never

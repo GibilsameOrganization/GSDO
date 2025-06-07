@@ -1,63 +1,93 @@
 
-import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, LogIn, LogOut, Settings } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
+import { Button } from '@/components/ui/button';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { user, isAdmin, signOut } = useAuth();
 
-  const navItems = [
-    { name: "Home", path: "/" },
-    { name: "About Us", path: "/about" },
-    { name: "Our Work", path: "/our-work" },
-    { name: "Get Involved", path: "/get-involved" },
-    { name: "News & Stories", path: "/news" },
+  const navigation = [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Our Work', href: '/our-work' },
+    { name: 'Get Involved', href: '/get-involved' },
+    { name: 'News', href: '/news' },
   ];
 
-  const isActive = (path: string) => location.pathname === path;
+  const handleSignOut = async () => {
+    await signOut();
+  };
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
-            <div className="w-10 h-10 bg-royal-blue rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-lg">G</span>
-            </div>
-            <div className="hidden sm:block">
-              <span className="text-xl font-bold text-gsdo-black">GSDO</span>
-              <p className="text-xs text-gray-600">Sustainable Development</p>
-            </div>
-          </Link>
+        <div className="flex justify-between h-16">
+          <div className="flex items-center">
+            <Link to="/" className="flex-shrink-0">
+              <span className="text-2xl font-bold text-royal-blue">GSDO</span>
+            </Link>
+          </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
+            {navigation.map((item) => (
               <Link
                 key={item.name}
-                to={item.path}
-                className={`text-sm font-medium transition-colors hover:text-royal-blue ${
-                  isActive(item.path) ? "text-royal-blue" : "text-gsdo-black"
+                to={item.href}
+                className={`px-3 py-2 text-sm font-medium transition-colors ${
+                  location.pathname === item.href
+                    ? 'text-royal-blue border-b-2 border-royal-blue'
+                    : 'text-gray-700 hover:text-royal-blue'
                 }`}
               >
                 {item.name}
               </Link>
             ))}
-            <Button className="bg-royal-blue hover:bg-blue-700 text-white">
-              Donate Now
-            </Button>
+            
+            {/* Auth buttons */}
+            <div className="flex items-center space-x-2">
+              {user ? (
+                <>
+                  {isAdmin && (
+                    <Link to="/admin">
+                      <Button variant="outline" size="sm" className="flex items-center space-x-1">
+                        <Settings className="h-4 w-4" />
+                        <span>Admin</span>
+                      </Button>
+                    </Link>
+                  )}
+                  <Button 
+                    onClick={handleSignOut}
+                    variant="outline" 
+                    size="sm" 
+                    className="flex items-center space-x-1"
+                  >
+                    <LogOut className="h-4 w-4" />
+                    <span>Sign Out</span>
+                  </Button>
+                </>
+              ) : (
+                <Link to="/auth">
+                  <Button variant="outline" size="sm" className="flex items-center space-x-1">
+                    <LogIn className="h-4 w-4" />
+                    <span>Sign In</span>
+                  </Button>
+                </Link>
+              )}
+            </div>
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-gsdo-black hover:text-royal-blue focus:outline-none"
+              className="text-gray-700 hover:text-royal-blue"
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
@@ -65,23 +95,54 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden">
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white border-t">
-              {navItems.map((item) => (
+            <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
+              {navigation.map((item) => (
                 <Link
                   key={item.name}
-                  to={item.path}
-                  className={`block px-3 py-2 text-base font-medium transition-colors hover:text-royal-blue ${
-                    isActive(item.path) ? "text-royal-blue" : "text-gsdo-black"
-                  }`}
+                  to={item.href}
                   onClick={() => setIsOpen(false)}
+                  className={`block px-3 py-2 text-base font-medium transition-colors ${
+                    location.pathname === item.href
+                      ? 'text-royal-blue bg-blue-50'
+                      : 'text-gray-700 hover:text-royal-blue hover:bg-gray-50'
+                  }`}
                 >
                   {item.name}
                 </Link>
               ))}
-              <div className="px-3 py-2">
-                <Button className="w-full bg-royal-blue hover:bg-blue-700 text-white">
-                  Donate Now
-                </Button>
+              
+              {/* Mobile auth buttons */}
+              <div className="pt-2 border-t">
+                {user ? (
+                  <>
+                    {isAdmin && (
+                      <Link
+                        to="/admin"
+                        onClick={() => setIsOpen(false)}
+                        className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-royal-blue hover:bg-gray-50"
+                      >
+                        Admin Panel
+                      </Link>
+                    )}
+                    <button
+                      onClick={() => {
+                        handleSignOut();
+                        setIsOpen(false);
+                      }}
+                      className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-royal-blue hover:bg-gray-50"
+                    >
+                      Sign Out
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    to="/auth"
+                    onClick={() => setIsOpen(false)}
+                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-royal-blue hover:bg-gray-50"
+                  >
+                    Sign In
+                  </Link>
+                )}
               </div>
             </div>
           </div>

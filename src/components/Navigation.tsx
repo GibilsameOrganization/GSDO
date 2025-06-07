@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, LogIn, LogOut, Settings } from 'lucide-react';
+import { Menu, X, LogOut, Settings } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 
@@ -48,37 +48,28 @@ const Navigation = () => {
               </Link>
             ))}
             
-            {/* Auth buttons */}
-            <div className="flex items-center space-x-2">
-              {user ? (
-                <>
-                  {isAdmin && (
-                    <Link to="/admin">
-                      <Button variant="outline" size="sm" className="flex items-center space-x-1">
-                        <Settings className="h-4 w-4" />
-                        <span>Admin</span>
-                      </Button>
-                    </Link>
-                  )}
-                  <Button 
-                    onClick={handleSignOut}
-                    variant="outline" 
-                    size="sm" 
-                    className="flex items-center space-x-1"
-                  >
-                    <LogOut className="h-4 w-4" />
-                    <span>Sign Out</span>
-                  </Button>
-                </>
-              ) : (
-                <Link to="/auth">
-                  <Button variant="outline" size="sm" className="flex items-center space-x-1">
-                    <LogIn className="h-4 w-4" />
-                    <span>Sign In</span>
-                  </Button>
-                </Link>
-              )}
-            </div>
+            {/* Auth buttons - only show if user is logged in */}
+            {user && (
+              <div className="flex items-center space-x-2">
+                {isAdmin && (
+                  <Link to="/admin">
+                    <Button variant="outline" size="sm" className="flex items-center space-x-1">
+                      <Settings className="h-4 w-4" />
+                      <span>Admin</span>
+                    </Button>
+                  </Link>
+                )}
+                <Button 
+                  onClick={handleSignOut}
+                  variant="outline" 
+                  size="sm" 
+                  className="flex items-center space-x-1"
+                >
+                  <LogOut className="h-4 w-4" />
+                  <span>Sign Out</span>
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -111,39 +102,29 @@ const Navigation = () => {
                 </Link>
               ))}
               
-              {/* Mobile auth buttons */}
-              <div className="pt-2 border-t">
-                {user ? (
-                  <>
-                    {isAdmin && (
-                      <Link
-                        to="/admin"
-                        onClick={() => setIsOpen(false)}
-                        className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-royal-blue hover:bg-gray-50"
-                      >
-                        Admin Panel
-                      </Link>
-                    )}
-                    <button
-                      onClick={() => {
-                        handleSignOut();
-                        setIsOpen(false);
-                      }}
-                      className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-royal-blue hover:bg-gray-50"
+              {/* Mobile auth buttons - only show if user is logged in */}
+              {user && (
+                <div className="pt-2 border-t">
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setIsOpen(false)}
+                      className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-royal-blue hover:bg-gray-50"
                     >
-                      Sign Out
-                    </button>
-                  </>
-                ) : (
-                  <Link
-                    to="/auth"
-                    onClick={() => setIsOpen(false)}
-                    className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-royal-blue hover:bg-gray-50"
+                      Admin Panel
+                    </Link>
+                  )}
+                  <button
+                    onClick={() => {
+                      handleSignOut();
+                      setIsOpen(false);
+                    }}
+                    className="block w-full text-left px-3 py-2 text-base font-medium text-gray-700 hover:text-royal-blue hover:bg-gray-50"
                   >
-                    Sign In
-                  </Link>
-                )}
-              </div>
+                    Sign Out
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}

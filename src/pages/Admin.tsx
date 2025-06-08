@@ -4,12 +4,13 @@ import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, Users, FileText, BarChart3, Image, Globe } from 'lucide-react';
+import { LogOut, Users, FileText, BarChart3, Image, Globe, Camera } from 'lucide-react';
 import HeroSlidesManager from '@/components/admin/HeroSlidesManager';
 import NewsManager from '@/components/admin/NewsManager';
 import ImpactMetricsManager from '@/components/admin/ImpactMetricsManager';
 import StoriesManager from '@/components/admin/StoriesManager';
 import SiteContentManager from '@/components/admin/SiteContentManager';
+import PhotoManager from '@/components/admin/PhotoManager';
 
 const Admin = () => {
   const { user, signOut } = useAuth();
@@ -51,10 +52,14 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="content" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="content" className="flex items-center space-x-2">
               <Globe className="h-4 w-4" />
               <span>Site Content</span>
+            </TabsTrigger>
+            <TabsTrigger value="photos" className="flex items-center space-x-2">
+              <Camera className="h-4 w-4" />
+              <span>Photos</span>
             </TabsTrigger>
             <TabsTrigger value="hero" className="flex items-center space-x-2">
               <Image className="h-4 w-4" />
@@ -76,6 +81,10 @@ const Admin = () => {
 
           <TabsContent value="content">
             <SiteContentManager />
+          </TabsContent>
+
+          <TabsContent value="photos">
+            <PhotoManager />
           </TabsContent>
 
           <TabsContent value="hero">

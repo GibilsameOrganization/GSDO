@@ -1,22 +1,30 @@
 
 import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, Users, FileText, BarChart3, Image, Globe, Camera } from 'lucide-react';
+import { LogOut, Users, FileText, BarChart3, Image, Globe, Camera, Target } from 'lucide-react';
 import HeroSlidesManager from '@/components/admin/HeroSlidesManager';
 import NewsManager from '@/components/admin/NewsManager';
 import ImpactMetricsManager from '@/components/admin/ImpactMetricsManager';
 import StoriesManager from '@/components/admin/StoriesManager';
 import SiteContentManager from '@/components/admin/SiteContentManager';
 import PhotoManager from '@/components/admin/PhotoManager';
+import FocusAreasManager from '@/components/admin/FocusAreasManager';
 
 const Admin = () => {
   const { user, signOut } = useAuth();
+  const navigate = useNavigate();
 
   const handleSignOut = async () => {
-    await signOut();
+    try {
+      await signOut();
+      navigate('/');
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
   };
 
   return (
@@ -52,10 +60,14 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="content" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="content" className="flex items-center space-x-2">
               <Globe className="h-4 w-4" />
               <span>Site Content</span>
+            </TabsTrigger>
+            <TabsTrigger value="focus-areas" className="flex items-center space-x-2">
+              <Target className="h-4 w-4" />
+              <span>Focus Areas</span>
             </TabsTrigger>
             <TabsTrigger value="photos" className="flex items-center space-x-2">
               <Camera className="h-4 w-4" />
@@ -81,6 +93,10 @@ const Admin = () => {
 
           <TabsContent value="content">
             <SiteContentManager />
+          </TabsContent>
+
+          <TabsContent value="focus-areas">
+            <FocusAreasManager />
           </TabsContent>
 
           <TabsContent value="photos">

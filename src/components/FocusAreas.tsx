@@ -1,45 +1,80 @@
 
-import { Heart, Droplets, Leaf, GraduationCap, Users, Shield } from "lucide-react";
+import React, { useState, useEffect } from 'react';
+import { supabase } from '@/integrations/supabase/client';
+import { Heart, Droplets, Leaf, GraduationCap, Users, Shield, Target, Building, Globe, Zap } from "lucide-react";
+
+// Icon mapping for dynamic icon rendering
+const iconMap: { [key: string]: React.ComponentType<{ size?: number }> } = {
+  Heart,
+  Droplets,
+  Leaf,
+  GraduationCap,
+  Users,
+  Shield,
+  Target,
+  Building,
+  Globe,
+  Zap,
+};
 
 const FocusAreas = () => {
-  const areas = [
+  const [areas, setAreas] = useState([
     {
-      icon: Users,
+      icon: "Users",
       title: "Gender Equality",
       description: "Empowering women and girls through education, economic opportunities, and advocacy for equal rights.",
       color: "bg-pink-100 text-pink-600"
     },
     {
-      icon: Droplets,
+      icon: "Droplets",
       title: "Food & Water Security",
       description: "Ensuring access to clean water, sanitation, and sustainable food systems for all communities.",
       color: "bg-blue-100 text-blue-600"
     },
     {
-      icon: Leaf,
+      icon: "Leaf",
       title: "Climate & Environment",
       description: "Building resilience against climate change through sustainable practices and environmental protection.",
       color: "bg-green-100 text-green-600"
     },
     {
-      icon: Heart,
+      icon: "Heart",
       title: "Health & Sanitation",
       description: "Improving healthcare access and promoting health education in underserved communities.",
       color: "bg-red-100 text-red-600"
     },
     {
-      icon: GraduationCap,
+      icon: "GraduationCap",
       title: "Education & Youth",
       description: "Providing quality education and empowering young people to become agents of change.",
       color: "bg-purple-100 text-purple-600"
     },
     {
-      icon: Shield,
+      icon: "Shield",
       title: "Emergency Response",
       description: "Rapid humanitarian aid and disaster relief to communities in crisis situations.",
       color: "bg-orange-100 text-orange-600"
     }
-  ];
+  ]);
+
+  useEffect(() => {
+    fetchFocusAreas();
+  }, []);
+
+  const fetchFocusAreas = async () => {
+    const { data, error } = await supabase
+      .from('site_content')
+      .select('content')
+      .eq('section_key', 'focus_areas')
+      .single();
+
+    if (data && data.content) {
+      const content = data.content as any;
+      if (content.areas && content.areas.length > 0) {
+        setAreas(content.areas);
+      }
+    }
+  };
 
   return (
     <section className="py-16 bg-white">
@@ -55,7 +90,7 @@ const FocusAreas = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {areas.map((area, index) => {
-            const IconComponent = area.icon;
+            const IconComponent = iconMap[area.icon] || Users;
             return (
               <div
                 key={area.title}

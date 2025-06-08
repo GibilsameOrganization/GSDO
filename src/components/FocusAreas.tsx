@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { Heart, Droplets, Leaf, GraduationCap, Users, Shield, Target, Building, Globe, Zap } from "lucide-react";
+import { Heart, Droplets, Leaf, GraduationCap, Users, Shield, Target, Building, Globe, Zap, DollarSign, Apple, HandHeart, UserCheck, Handshake } from "lucide-react";
 
 // Icon mapping for dynamic icon rendering
 const iconMap: { [key: string]: React.ComponentType<{ size?: number }> } = {
@@ -15,45 +15,44 @@ const iconMap: { [key: string]: React.ComponentType<{ size?: number }> } = {
   Building,
   Globe,
   Zap,
+  DollarSign,
+  Apple,
+  HandHeart,
+  UserCheck,
+  Handshake,
 };
 
 const FocusAreas = () => {
   const [areas, setAreas] = useState([
     {
-      icon: "Users",
-      title: "Gender Equality",
-      description: "Empowering women and girls through education, economic opportunities, and advocacy for equal rights.",
-      color: "bg-pink-100 text-pink-600"
-    },
-    {
-      icon: "Droplets",
-      title: "Food & Water Security",
-      description: "Ensuring access to clean water, sanitation, and sustainable food systems for all communities.",
-      color: "bg-blue-100 text-blue-600"
-    },
-    {
-      icon: "Leaf",
-      title: "Climate & Environment",
-      description: "Building resilience against climate change through sustainable practices and environmental protection.",
+      icon: "DollarSign",
+      title: "Poverty Alleviation and Livelihoods",
+      description: "Empowering communities through sustainable livelihood opportunities, skills development, and economic empowerment programs to break the cycle of poverty.",
       color: "bg-green-100 text-green-600"
     },
     {
+      icon: "Apple",
+      title: "Food Security and Nutrition",
+      description: "Ensuring access to nutritious food and promoting sustainable agriculture practices to combat hunger and malnutrition in vulnerable communities.",
+      color: "bg-orange-100 text-orange-600"
+    },
+    {
       icon: "Heart",
-      title: "Health & Sanitation",
-      description: "Improving healthcare access and promoting health education in underserved communities.",
+      title: "Health and Well-being",
+      description: "Improving healthcare access, promoting health education, and strengthening health systems to ensure better health outcomes for all.",
       color: "bg-red-100 text-red-600"
     },
     {
-      icon: "GraduationCap",
-      title: "Education & Youth",
-      description: "Providing quality education and empowering young people to become agents of change.",
+      icon: "UserCheck",
+      title: "Gender Equality and Women's Empowerment",
+      description: "Promoting equal rights and opportunities for women and girls through education, economic participation, and advocacy for gender equality.",
       color: "bg-purple-100 text-purple-600"
     },
     {
-      icon: "Shield",
-      title: "Emergency Response",
-      description: "Rapid humanitarian aid and disaster relief to communities in crisis situations.",
-      color: "bg-orange-100 text-orange-600"
+      icon: "Handshake",
+      title: "Peacebuilding and Social Cohesion",
+      description: "Fostering peaceful communities through conflict resolution, dialogue facilitation, and programs that promote social harmony and unity.",
+      color: "bg-blue-100 text-blue-600"
     }
   ]);
 

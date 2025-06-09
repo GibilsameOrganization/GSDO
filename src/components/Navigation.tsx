@@ -1,14 +1,17 @@
 
 import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, LogOut, Settings } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const { user, isAdmin, signOut } = useAuth();
+  const { toast } = useToast();
 
   const navigation = [
     { name: 'Home', href: '/' },
@@ -19,8 +22,25 @@ const Navigation = () => {
   ];
 
   const handleSignOut = async () => {
-    await signOut();
+    try {
+      console.log('Navigation: Starting sign out process...');
+      await signOut();
+      toast({
+        title: "Signed out successfully",
+        description: "You have been logged out of your account.",
+      });
+      navigate('/');
+    } catch (error) {
+      console.error('Navigation: Sign out error:', error);
+      toast({
+        title: "Error signing out",
+        description: "There was a problem signing you out. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
+
+  console.log('Navigation render - User:', user?.email, 'IsAdmin:', isAdmin);
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">

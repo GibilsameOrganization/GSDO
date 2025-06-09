@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import * as React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -8,14 +8,14 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { useToast } from '@/hooks/use-toast';
 
 const Auth = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+  const [loading, setLoading] = React.useState(false);
   const { signIn, user, isAdmin } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (user) {
       if (isAdmin) {
         navigate('/admin');
@@ -23,7 +23,7 @@ const Auth = () => {
         navigate('/');
       }
     }
-  }, [user, isAdmin, navigate]);
+  }, [user, isAdmin]); // Removed navigate from dependencies as it is stable and does not change.
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();

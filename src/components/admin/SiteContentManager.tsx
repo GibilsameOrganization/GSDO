@@ -35,61 +35,82 @@ const SiteContentManager = () => {
   }, []);
 
   const fetchSiteContent = async () => {
-    const { data, error } = await supabase
-      .from('site_content')
-      .select('content')
-      .eq('section_key', 'who_we_are')
-      .single();
+    try {
+      const { data, error } = await supabase
+        .from('site_content')
+        .select('content')
+        .eq('section_key', 'who_we_are')
+        .maybeSingle();
 
-    if (error) {
-      if (error.code !== 'PGRST116') { // Not found error
+      if (error && error.code !== 'PGRST116') {
+        console.error('Error fetching content:', error);
         toast({
           title: "Error fetching content",
           description: error.message,
           variant: "destructive",
         });
+      } else if (data && data.content) {
+        const content = data.content as any;
+        setFormData({
+          title: content.title || '',
+          description: content.description || '',
+          mission: content.mission || '',
+          vision: content.vision || '',
+          values: content.values || '',
+        });
       }
-    } else if (data) {
-      const content = data.content as any;
-      setFormData({
-        title: content.title || '',
-        description: content.description || '',
-        mission: content.mission || '',
-        vision: content.vision || '',
-        values: content.values || '',
+    } catch (error) {
+      console.error('Unexpected error:', error);
+      toast({
+        title: "Error",
+        description: "An unexpected error occurred while fetching content",
+        variant: "destructive",
       });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (saving) return; // Prevent multiple submissions
+
     setSaving(true);
 
-    const contentData = {
-      section_key: 'who_we_are',
-      content: formData as any, // Cast to any to satisfy Json type
-      updated_by: user?.id,
-    };
+    try {
+      const contentData = {
+        section_key: 'who_we_are',
+        content: formData as any,
+        updated_by: user?.id,
+      };
 
-    const { error } = await supabase
-      .from('site_content')
-      .upsert(contentData, { onConflict: 'section_key' });
+      const { error } = await supabase
+        .from('site_content')
+        .upsert(contentData, { onConflict: 'section_key' });
 
-    if (error) {
+      if (error) {
+        console.error('Error saving content:', error);
+        toast({
+          title: "Error saving content",
+          description: error.message,
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Success",
+          description: "Site content updated successfully!",
+        });
+      }
+    } catch (error) {
+      console.error('Unexpected error during save:', error);
       toast({
-        title: "Error saving content",
-        description: error.message,
+        title: "Error",
+        description: "An unexpected error occurred while saving",
         variant: "destructive",
       });
-    } else {
-      toast({
-        title: "Success",
-        description: "Site content updated successfully!",
-      });
+    } finally {
+      setSaving(false);
     }
-    
-    setSaving(false);
   };
 
   if (loading) {

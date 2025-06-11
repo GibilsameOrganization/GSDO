@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
+import { useContent } from '@/contexts/ContentContext';
 import { Trash2, Plus } from 'lucide-react';
 
 interface FocusArea {
@@ -23,6 +24,7 @@ const FocusAreasManager = () => {
   const [focusAreas, setFocusAreas] = useState<FocusArea[]>([]);
   const { toast } = useToast();
   const { user } = useAuth();
+  const { refreshSection } = useContent();
 
   useEffect(() => {
     fetchFocusAreas();
@@ -75,6 +77,9 @@ const FocusAreasManager = () => {
         title: "Success",
         description: "Focus areas updated successfully!",
       });
+      // Trigger content refresh on the frontend
+      refreshSection('focus_areas');
+      console.log('FocusAreasManager: Content saved, triggering refresh');
     }
     
     setSaving(false);

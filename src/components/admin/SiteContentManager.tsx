@@ -8,6 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
+import { useContent } from '@/contexts/ContentContext';
 
 interface SiteContentData {
   title: string;
@@ -29,6 +30,7 @@ const SiteContentManager = () => {
   });
   const { toast } = useToast();
   const { user } = useAuth();
+  const { refreshSection } = useContent();
 
   useEffect(() => {
     fetchSiteContent();
@@ -100,6 +102,9 @@ const SiteContentManager = () => {
           title: "Success",
           description: "Site content updated successfully!",
         });
+        // Trigger content refresh on the frontend
+        refreshSection('who_we_are');
+        console.log('SiteContentManager: Content saved, triggering refresh');
       }
     } catch (error) {
       console.error('Unexpected error during save:', error);

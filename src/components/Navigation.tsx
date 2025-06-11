@@ -25,10 +25,12 @@ const Navigation = () => {
     try {
       console.log('Navigation: Starting sign out process...');
       await signOut();
+      console.log('Navigation: Sign out completed, showing success toast');
       toast({
         title: "Signed out successfully",
         description: "You have been logged out of your account.",
       });
+      console.log('Navigation: Navigating to home page');
       navigate('/');
     } catch (error) {
       console.error('Navigation: Sign out error:', error);
@@ -37,10 +39,13 @@ const Navigation = () => {
         description: "There was a problem signing you out. Please try again.",
         variant: "destructive",
       });
+      // Even if there's an error, try to navigate to home
+      // since the local state should be cleared
+      navigate('/');
     }
   };
 
-  console.log('Navigation render - User:', user?.email, 'IsAdmin:', isAdmin);
+  console.log('Navigation render - User:', user?.email, 'IsAdmin:', isAdmin, 'User ID:', user?.id);
 
   return (
     <nav className="bg-white shadow-lg sticky top-0 z-50">

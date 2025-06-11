@@ -20,10 +20,14 @@ const Admin = () => {
 
   const handleSignOut = async () => {
     try {
+      console.log('Admin: Starting sign out process...');
       await signOut();
+      console.log('Admin: Sign out completed, navigating to home');
       navigate('/');
     } catch (error) {
-      console.error('Error signing out:', error);
+      console.error('Admin: Error signing out:', error);
+      // Even if there's an error, navigate to home since local state is cleared
+      navigate('/');
     }
   };
 

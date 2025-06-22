@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, LogOut, Settings } from 'lucide-react';
@@ -13,12 +12,13 @@ const Navigation = () => {
   const { user, isAdmin, signOut } = useAuth();
   const { toast } = useToast();
 
-  const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'About', href: '/about' },
-    { name: 'Our Work', href: '/our-work' },
-    { name: 'Get Involved', href: '/get-involved' },
-    { name: 'News', href: '/news' },
+  const navigationItems = [
+    { name: "Home", href: "/" },
+    { name: "About", href: "/about" },
+    { name: "Our Work", href: "/our-work" },
+    { name: "Get Involved", href: "/get-involved" },
+    { name: "News", href: "/news" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const handleSignOut = async () => {
@@ -59,7 +59,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
+            {navigationItems.map((item) => (
               <Link
                 key={item.name}
                 to={item.href}
@@ -112,7 +112,7 @@ const Navigation = () => {
         {isOpen && (
           <div className="md:hidden">
             <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t">
-              {navigation.map((item) => (
+              {navigationItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.href}

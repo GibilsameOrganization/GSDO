@@ -1,5 +1,6 @@
 
 import { Link } from "react-router-dom";
+import NewsletterSignup from "./NewsletterSignup";
 
 const Footer = () => {
   return (
@@ -22,19 +23,7 @@ const Footer = () => {
             </p>
             
             {/* Newsletter */}
-            <div>
-              <h4 className="font-semibold mb-3">Stay Connected</h4>
-              <div className="flex max-w-md">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="flex-1 px-4 py-2 rounded-l-md border-0 text-gsdo-black"
-                />
-                <button className="bg-royal-blue hover:bg-blue-700 px-6 py-2 rounded-r-md transition-colors">
-                  Subscribe
-                </button>
-              </div>
-            </div>
+            <NewsletterSignup />
           </div>
 
           {/* Quick Links */}
@@ -45,6 +34,7 @@ const Footer = () => {
               <li><Link to="/our-work" className="text-gray-300 hover:text-white transition-colors">Our Work</Link></li>
               <li><Link to="/get-involved" className="text-gray-300 hover:text-white transition-colors">Get Involved</Link></li>
               <li><Link to="/news" className="text-gray-300 hover:text-white transition-colors">News & Stories</Link></li>
+              <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link></li>
             </ul>
           </div>
 

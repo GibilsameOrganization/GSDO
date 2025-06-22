@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -15,6 +16,7 @@ const About = React.lazy(() => import("./pages/About"));
 const OurWork = React.lazy(() => import("./pages/OurWork"));
 const GetInvolved = React.lazy(() => import("./pages/GetInvolved"));
 const News = React.lazy(() => import("./pages/News"));
+const Contact = React.lazy(() => import("./pages/Contact"));
 const Auth = React.lazy(() => import("./pages/Auth"));
 const Admin = React.lazy(() => import("./pages/Admin"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
@@ -43,6 +45,7 @@ const App = () => (
                 <Route path="/our-work" element={<OurWork />} />
                 <Route path="/get-involved" element={<GetInvolved />} />
                 <Route path="/news" element={<News />} />
+                <Route path="/contact" element={<Contact />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route 
                   path="/admin" 

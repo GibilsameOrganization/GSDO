@@ -34,7 +34,7 @@ const handler = async (req: Request): Promise<Response> => {
     if (type === 'donation') {
       // Send donation instructions email to donor
       const emailResponse = await resend.emails.send({
-        from: "GSDO Donations <noreply@resend.dev>",
+        from: "GSDO Donations <donations@support.gibilsame.org>",
         to: [email],
         subject: "Thank You for Your Donation - Bank Transfer Details",
         html: `
@@ -114,8 +114,8 @@ const handler = async (req: Request): Promise<Response> => {
 
       // Send notification to admin about new donation intent
       await resend.emails.send({
-        from: "GSDO Donations <noreply@resend.dev>",
-        to: ["admin@gsdo.org"], // Replace with actual admin email
+        from: "GSDO Donations <donations@support.gibilsame.org>",
+        to: ["yasin.osman@gibilsame.org"],
         subject: `New Donation Intent: $${amount} from ${name}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -142,7 +142,7 @@ const handler = async (req: Request): Promise<Response> => {
     } else if (type === 'newsletter') {
       // Send newsletter confirmation email
       const emailResponse = await resend.emails.send({
-        from: "GSDO <noreply@resend.dev>",
+        from: "GSDO Newsletter <newsletter@support.gibilsame.org>",
         to: [email],
         subject: "Welcome to GSDO Newsletter!",
         html: `
@@ -170,8 +170,8 @@ const handler = async (req: Request): Promise<Response> => {
 
       // Also send notification to admin
       await resend.emails.send({
-        from: "GSDO Newsletter <noreply@resend.dev>",
-        to: ["admin@gsdo.org"], // Replace with actual admin email
+        from: "GSDO Newsletter <newsletter@support.gibilsame.org>",
+        to: ["yasin.osman@gibilsame.org"],
         subject: "New Newsletter Subscription",
         html: `
           <h2>New Newsletter Subscription</h2>
@@ -185,8 +185,8 @@ const handler = async (req: Request): Promise<Response> => {
     } else {
       // Send contact form email to admin
       const emailResponse = await resend.emails.send({
-        from: "GSDO Contact <noreply@resend.dev>",
-        to: ["admin@gsdo.org"], // Replace with actual admin email
+        from: "GSDO Contact <contact@support.gibilsame.org>",
+        to: ["yasin.osman@gibilsame.org"],
         subject: `Contact Form: ${subject}`,
         html: `
           <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -210,7 +210,7 @@ const handler = async (req: Request): Promise<Response> => {
 
       // Send confirmation email to user
       await resend.emails.send({
-        from: "GSDO <noreply@resend.dev>",
+        from: "GSDO Contact <contact@support.gibilsame.org>",
         to: [email],
         subject: "Thank you for contacting GSDO",
         html: `

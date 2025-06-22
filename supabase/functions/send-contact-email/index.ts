@@ -1,4 +1,3 @@
-
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { Resend } from "npm:resend@2.0.0";
 
@@ -13,9 +12,12 @@ const corsHeaders = {
 interface ContactEmailRequest {
   name: string;
   email: string;
-  subject: string;
-  message: string;
-  type: 'contact' | 'newsletter';
+  subject?: string;
+  message?: string;
+  phone?: string;
+  amount?: string;
+  donationType?: string;
+  type: 'contact' | 'newsletter' | 'donation';
 }
 
 const handler = async (req: Request): Promise<Response> => {
@@ -25,11 +27,119 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, email, subject, message, type }: ContactEmailRequest = await req.json();
+    const { name, email, subject, message, phone, amount, donationType, type }: ContactEmailRequest = await req.json();
 
     console.log(`Processing ${type} email for:`, { name, email, subject });
 
-    if (type === 'newsletter') {
+    if (type === 'donation') {
+      // Send donation instructions email to donor
+      const emailResponse = await resend.emails.send({
+        from: "GSDO Donations <noreply@resend.dev>",
+        to: [email],
+        subject: "Thank You for Your Donation - Bank Transfer Details",
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <div style="background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%); color: white; padding: 30px; text-align: center;">
+              <h1 style="margin: 0; font-size: 28px;">Thank You, ${name}!</h1>
+              <p style="margin: 10px 0 0 0; font-size: 18px; opacity: 0.9;">Your generosity helps change lives</p>
+            </div>
+            
+            <div style="padding: 30px; background-color: #f8fafc;">
+              <div style="background: white; padding: 25px; border-radius: 10px; margin-bottom: 20px;">
+                <h2 style="color: #1e40af; margin-top: 0;">Donation Details</h2>
+                <table style="width: 100%; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;"><strong>Amount:</strong></td>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;">$${amount} USD</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;"><strong>Type:</strong></td>
+                    <td style="padding: 8px 0; border-bottom: 1px solid #e5e7eb;">${donationType || 'One-time'} Donation</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px 0;"><strong>Reference:</strong></td>
+                    <td style="padding: 8px 0;">GSDO-${Date.now()}</td>
+                  </tr>
+                </table>
+              </div>
+
+              <div style="background: white; padding: 25px; border-radius: 10px; margin-bottom: 20px;">
+                <h2 style="color: #1e40af; margin-top: 0;">Bank Transfer Details</h2>
+                <div style="background: #f1f5f9; padding: 20px; border-radius: 8px; border-left: 4px solid #1e40af;">
+                  <p style="margin: 0 0 15px 0;"><strong>Bank Name:</strong> Global Development Bank</p>
+                  <p style="margin: 0 0 15px 0;"><strong>Account Name:</strong> Gibilsame Sustainable Development Organization</p>
+                  <p style="margin: 0 0 15px 0;"><strong>Account Number:</strong> 1234567890</p>
+                  <p style="margin: 0 0 15px 0;"><strong>Routing Number:</strong> 021000021</p>
+                  <p style="margin: 0 0 15px 0;"><strong>SWIFT Code:</strong> GDBKUS33</p>
+                  <p style="margin: 0;"><strong>Reference:</strong> GSDO-${Date.now()}</p>
+                </div>
+                <p style="color: #dc2626; font-weight: bold; margin-top: 15px;">
+                  ⚠️ Please include the reference number in your transfer to ensure proper allocation.
+                </p>
+              </div>
+
+              <div style="background: white; padding: 25px; border-radius: 10px;">
+                <h3 style="color: #1e40af; margin-top: 0;">What Happens Next?</h3>
+                <ol style="color: #374151; line-height: 1.6;">
+                  <li>Transfer the amount using the bank details above</li>
+                  <li>Include the reference number in your transfer</li>
+                  <li>We'll send you a confirmation email once we receive your donation</li>
+                  <li>You'll receive a tax-deductible receipt within 48 hours</li>
+                  <li>Regular updates on how your donation is making an impact</li>
+                </ol>
+              </div>
+            </div>
+
+            ${message ? `
+            <div style="background: #fef3c7; padding: 20px; margin: 20px 30px; border-radius: 8px;">
+              <h4 style="margin-top: 0; color: #92400e;">Your Message:</h4>
+              <p style="color: #92400e; margin-bottom: 0;">"${message}"</p>
+            </div>
+            ` : ''}
+
+            <div style="background: #1e40af; color: white; padding: 20px 30px; text-align: center;">
+              <p style="margin: 0 0 10px 0;">Questions about your donation?</p>
+              <p style="margin: 0; opacity: 0.9;">Contact us at donations@gsdo.org or +1 (555) 123-4567</p>
+            </div>
+
+            <div style="padding: 20px 30px; background: #f8fafc; text-align: center;">
+              <p style="color: #6b7280; font-size: 14px; margin: 0;">
+                Gibilsame Sustainable Development Organization<br>
+                Tax ID: 12-3456789 | Registered Charity
+              </p>
+            </div>
+          </div>
+        `,
+      });
+
+      // Send notification to admin about new donation intent
+      await resend.emails.send({
+        from: "GSDO Donations <noreply@resend.dev>",
+        to: ["admin@gsdo.org"], // Replace with actual admin email
+        subject: `New Donation Intent: $${amount} from ${name}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h1 style="color: #1e40af;">New Donation Intent Received</h1>
+            <div style="background-color: #f9fafb; padding: 20px; border-radius: 8px; margin: 20px 0;">
+              <h3 style="color: #374151;">Donor Information</h3>
+              <p><strong>Name:</strong> ${name}</p>
+              <p><strong>Email:</strong> ${email}</p>
+              ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ''}
+              <p><strong>Amount:</strong> $${amount} USD</p>
+              <p><strong>Type:</strong> ${donationType || 'One-time'} Donation</p>
+              <p><strong>Reference:</strong> GSDO-${Date.now()}</p>
+              ${message ? `<p><strong>Message:</strong> ${message}</p>` : ''}
+            </div>
+            <p style="color: #6b7280; font-size: 14px;">
+              Submitted on: ${new Date().toLocaleString()}<br>
+              Bank details have been sent to the donor.
+            </p>
+          </div>
+        `,
+      });
+
+      console.log("Donation email sent successfully:", emailResponse);
+    } else if (type === 'newsletter') {
       // Send newsletter confirmation email
       const emailResponse = await resend.emails.send({
         from: "GSDO <noreply@resend.dev>",
@@ -87,7 +197,7 @@ const handler = async (req: Request): Promise<Response> => {
               <p><strong>Subject:</strong> ${subject}</p>
               <p><strong>Message:</strong></p>
               <div style="background-color: white; padding: 15px; border-radius: 4px; margin-top: 10px;">
-                ${message.replace(/\n/g, '<br>')}
+                ${message?.replace(/\n/g, '<br>')}
               </div>
             </div>
             <p style="color: #6b7280; font-size: 14px;">
@@ -111,7 +221,7 @@ const handler = async (req: Request): Promise<Response> => {
               <h3 style="color: #374151;">Your message:</h3>
               <p style="color: #6b7280;"><strong>Subject:</strong> ${subject}</p>
               <div style="background-color: white; padding: 15px; border-radius: 4px; margin-top: 10px;">
-                ${message.replace(/\n/g, '<br>')}
+                ${message?.replace(/\n/g, '<br>')}
               </div>
             </div>
             <p>Our team typically responds within 24-48 hours during business days.</p>

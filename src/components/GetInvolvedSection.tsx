@@ -1,42 +1,50 @@
 
 import { Heart, Users, Megaphone, DollarSign, Mail } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const GetInvolvedSection = () => {
+  const navigate = useNavigate();
+
   const ways = [
     {
       icon: DollarSign,
       title: "Donate",
       description: "Your contribution directly funds life-changing programs in communities worldwide.",
       action: "Give Today",
-      color: "bg-green-50 border-green-200 hover:bg-green-100"
+      color: "bg-green-50 border-green-200 hover:bg-green-100",
+      onClick: () => navigate('/donate')
     },
     {
       icon: Heart,
       title: "Volunteer",
       description: "Join our global network of volunteers making a difference in local and international projects.",
       action: "Join Us",
-      color: "bg-red-50 border-red-200 hover:bg-red-100"
+      color: "bg-red-50 border-red-200 hover:bg-red-100",
+      onClick: () => navigate('/get-involved')
     },
     {
       icon: Users,
       title: "Partner",
       description: "Collaborate with us as an organization, business, or institution to amplify our impact.",
       action: "Partner With Us",
-      color: "bg-blue-50 border-blue-200 hover:bg-blue-100"
+      color: "bg-blue-50 border-blue-200 hover:bg-blue-100",
+      onClick: () => navigate('/contact')
     },
     {
       icon: Megaphone,
       title: "Advocate",
       description: "Raise awareness and speak up for social justice and sustainable development in your community.",
       action: "Spread the Word",
-      color: "bg-purple-50 border-purple-200 hover:bg-purple-100"
+      color: "bg-purple-50 border-purple-200 hover:bg-purple-100",
+      onClick: () => navigate('/news')
     },
     {
       icon: Mail,
       title: "Stay Informed",
       description: "Subscribe to our newsletter for updates on our work and ways to get involved.",
       action: "Subscribe",
-      color: "bg-yellow-50 border-yellow-200 hover:bg-yellow-100"
+      color: "bg-yellow-50 border-yellow-200 hover:bg-yellow-100",
+      onClick: () => navigate('/contact')
     }
   ];
 
@@ -72,7 +80,10 @@ const GetInvolvedSection = () => {
                 <p className="text-gray-600 mb-6 leading-relaxed">
                   {way.description}
                 </p>
-                <button className="w-full bg-royal-blue hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors">
+                <button 
+                  onClick={way.onClick}
+                  className="w-full bg-royal-blue hover:bg-blue-700 text-white py-2 px-4 rounded-lg font-semibold transition-colors"
+                >
                   {way.action}
                 </button>
               </div>
@@ -89,10 +100,16 @@ const GetInvolvedSection = () => {
             Together, we can build a world where everyone has the opportunity to thrive. Your support makes the difference.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-white text-royal-blue hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors">
+            <button 
+              onClick={() => navigate('/donate')}
+              className="bg-white text-royal-blue hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors"
+            >
               Donate Now
             </button>
-            <button className="border-2 border-white text-white hover:bg-white hover:text-royal-blue px-8 py-3 rounded-lg font-semibold transition-colors">
+            <button 
+              onClick={() => navigate('/about')}
+              className="border-2 border-white text-white hover:bg-white hover:text-royal-blue px-8 py-3 rounded-lg font-semibold transition-colors"
+            >
               Learn More
             </button>
           </div>

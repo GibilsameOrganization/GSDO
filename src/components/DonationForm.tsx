@@ -1,5 +1,5 @@
-
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -9,6 +9,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { DollarSign, Heart, Users, Globe } from 'lucide-react';
 
 const DonationForm = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,8 +33,19 @@ const DonationForm = () => {
     e.preventDefault();
     setLoading(true);
 
+    console.log('Form submission started with data:', {
+      name: formData.name,
+      email: formData.email,
+      amount: formData.amount,
+      donationType: formData.donationType
+    });
+
     try {
-      const { error } = await supabase.functions.invoke('send-contact-email', {
+      const reference = `GSDO-${Date.now()}`;
+      console.log('Generated reference:', reference);
+
+      console.log('Calling supabase function...');
+      const { error, data } = await supabase.functions.invoke('send-contact-email', {
         body: {
           name: formData.name,
           email: formData.email,
@@ -45,14 +57,33 @@ const DonationForm = () => {
         }
       });
 
-      if (error) throw error;
+      console.log('Supabase function response:', { error, data });
 
-      toast({
-        title: "Thank you for your donation intent!",
-        description: "We've sent you an email with bank details and next steps.",
+      if (error) {
+        console.error('Supabase function error:', error);
+        throw error;
+      }
+
+      console.log('Email sent successfully, navigating to confirmation page...');
+      
+      // Navigate to confirmation page with donation details
+      const navigationState = {
+        donationReference: reference,
+        donorName: formData.name,
+        donorEmail: formData.email,
+        amount: formData.amount,
+        donationType: formData.donationType
+      };
+
+      console.log('Navigation state prepared:', navigationState);
+
+      navigate('/donation-confirmation', {
+        state: navigationState
       });
 
-      // Reset form
+      console.log('Navigation function called successfully');
+
+      // Reset form after successful navigation
       setFormData({
         name: '',
         email: '',
@@ -61,15 +92,23 @@ const DonationForm = () => {
         message: '',
         donationType: 'one-time'
       });
+
+      console.log('Form reset completed');
     } catch (error: any) {
-      console.error('Error submitting donation:', error);
+      console.error('Error in handleSubmit:', error);
+      console.error('Error details:', {
+        message: error.message,
+        stack: error.stack,
+        code: error.code
+      });
       toast({
         title: "Submission failed",
-        description: "Please try again later or contact us directly.",
+        description: `Error: ${error.message || 'Please try again later or contact us directly.'}`,
         variant: "destructive",
       });
     } finally {
       setLoading(false);
+      console.log('Form submission completed, loading set to false');
     }
   };
 
@@ -79,6 +118,8 @@ const DonationForm = () => {
     { amount: 250, impact: "Supports a community health worker for one month" },
     { amount: 500, impact: "Builds a sanitation facility for a rural school" }
   ];
+
+
 
   return (
     <div className="max-w-4xl mx-auto">
@@ -199,8 +240,10 @@ const DonationForm = () => {
               {loading ? "Processing..." : "Proceed with Donation"}
             </Button>
 
+
+
             <p className="text-sm text-gray-600 text-center">
-              You'll receive an email with bank details and payment instructions after submitting this form.
+              After submitting, you'll be redirected to a confirmation page with complete banking details and next steps.
             </p>
           </form>
         </div>

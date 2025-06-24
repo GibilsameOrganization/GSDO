@@ -1,5 +1,5 @@
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/contexts/AuthContext";
@@ -9,6 +9,7 @@ const Navigation = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, isAdmin, signOut } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSignOut = async () => {
     try {
@@ -79,13 +80,16 @@ const Navigation = () => {
                   </Button>
                 </>
               ) : (
-                <Button 
-                  variant="outline" 
-                  size="sm"
-                  onClick={() => navigate('/auth')}
-                >
-                  Sign In
-                </Button>
+                // Only show Sign In button on the auth page
+                location.pathname === '/auth' && (
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    onClick={() => navigate('/auth')}
+                  >
+                    Sign In
+                  </Button>
+                )
               )}
             </div>
           </div>
@@ -146,17 +150,20 @@ const Navigation = () => {
                     </Button>
                   </>
                 ) : (
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    className="w-full"
-                    onClick={() => {
-                      navigate('/auth');
-                      setIsMenuOpen(false);
-                    }}
-                  >
-                    Sign In
-                  </Button>
+                  // Only show Sign In button on the auth page
+                  location.pathname === '/auth' && (
+                    <Button 
+                      variant="outline" 
+                      size="sm"
+                      className="w-full"
+                      onClick={() => {
+                        navigate('/auth');
+                        setIsMenuOpen(false);
+                      }}
+                    >
+                      Sign In
+                    </Button>
+                  )
                 )}
               </div>
             </div>

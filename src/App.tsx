@@ -17,6 +17,7 @@ const GetInvolved = React.lazy(() => import("./pages/GetInvolved"));
 const News = React.lazy(() => import("./pages/News"));
 const Contact = React.lazy(() => import("./pages/Contact"));
 const Donate = React.lazy(() => import("./pages/Donate"));
+const DonationConfirmation = React.lazy(() => import("./pages/DonationConfirmation"));
 const Auth = React.lazy(() => import("./pages/Auth"));
 const Admin = React.lazy(() => import("./pages/Admin"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
@@ -47,6 +48,7 @@ const App = () => (
                 <Route path="/news" element={<News />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/donate" element={<Donate />} />
+                <Route path="/donation-confirmation" element={<DonationConfirmation />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route 
                   path="/admin" 

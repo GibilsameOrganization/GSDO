@@ -51,13 +51,14 @@ const App = () => (
                 <Route path="/donation-confirmation" element={<DonationConfirmation />} />
                 <Route path="/auth" element={<Auth />} />
                 <Route 
-                  path="/admin" 
+                  path="/manage" 
                   element={
                     <ProtectedRoute adminOnly>
                       <Admin />
                     </ProtectedRoute>
                   } 
                 />
+                {/* /admin path does NOT exist - will return 404 */}
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

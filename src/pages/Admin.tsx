@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, Users, FileText, BarChart3, Image, Globe, Camera, Target } from 'lucide-react';
+import { LogOut, Users, FileText, BarChart3, Image, Globe, Camera, Target, BookOpen } from 'lucide-react';
 import HeroSlidesManager from '@/components/admin/HeroSlidesManager';
 import NewsManager from '@/components/admin/NewsManager';
 import ImpactMetricsManager from '@/components/admin/ImpactMetricsManager';
@@ -13,6 +12,7 @@ import StoriesManager from '@/components/admin/StoriesManager';
 import SiteContentManager from '@/components/admin/SiteContentManager';
 import PhotoManager from '@/components/admin/PhotoManager';
 import FocusAreasManager from '@/components/admin/FocusAreasManager';
+import AboutManager from '@/components/admin/AboutManager';
 
 const Admin = () => {
   const { user, signOut } = useAuth();
@@ -64,39 +64,49 @@ const Admin = () => {
         </div>
 
         <Tabs defaultValue="content" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-7">
-            <TabsTrigger value="content" className="flex items-center space-x-2">
-              <Globe className="h-4 w-4" />
-              <span>Site Content</span>
-            </TabsTrigger>
-            <TabsTrigger value="focus-areas" className="flex items-center space-x-2">
-              <Target className="h-4 w-4" />
-              <span>Focus Areas</span>
-            </TabsTrigger>
-            <TabsTrigger value="photos" className="flex items-center space-x-2">
-              <Camera className="h-4 w-4" />
-              <span>Photos</span>
-            </TabsTrigger>
-            <TabsTrigger value="hero" className="flex items-center space-x-2">
-              <Image className="h-4 w-4" />
-              <span>Hero Slides</span>
-            </TabsTrigger>
-            <TabsTrigger value="metrics" className="flex items-center space-x-2">
-              <BarChart3 className="h-4 w-4" />
-              <span>Impact Metrics</span>
-            </TabsTrigger>
-            <TabsTrigger value="stories" className="flex items-center space-x-2">
-              <Users className="h-4 w-4" />
-              <span>Stories</span>
-            </TabsTrigger>
-            <TabsTrigger value="news" className="flex items-center space-x-2">
-              <FileText className="h-4 w-4" />
-              <span>News & Newsletters</span>
-            </TabsTrigger>
-          </TabsList>
+          <div className="overflow-x-auto">
+            <TabsList className="flex w-max min-w-full gap-1 p-1">
+              <TabsTrigger value="content" className="flex items-center space-x-1 text-xs px-3 py-2 whitespace-nowrap">
+                <Globe className="h-3 w-3" />
+                <span>Site Content</span>
+              </TabsTrigger>
+              <TabsTrigger value="about" className="flex items-center space-x-1 text-xs px-3 py-2 whitespace-nowrap">
+                <BookOpen className="h-3 w-3" />
+                <span>About Page</span>
+              </TabsTrigger>
+              <TabsTrigger value="focus-areas" className="flex items-center space-x-1 text-xs px-3 py-2 whitespace-nowrap">
+                <Target className="h-3 w-3" />
+                <span>Focus Areas</span>
+              </TabsTrigger>
+              <TabsTrigger value="photos" className="flex items-center space-x-1 text-xs px-3 py-2 whitespace-nowrap">
+                <Camera className="h-3 w-3" />
+                <span>Photos</span>
+              </TabsTrigger>
+              <TabsTrigger value="hero" className="flex items-center space-x-1 text-xs px-3 py-2 whitespace-nowrap">
+                <Image className="h-3 w-3" />
+                <span>Hero Slides</span>
+              </TabsTrigger>
+              <TabsTrigger value="metrics" className="flex items-center space-x-1 text-xs px-3 py-2 whitespace-nowrap">
+                <BarChart3 className="h-3 w-3" />
+                <span>Impact Metrics</span>
+              </TabsTrigger>
+              <TabsTrigger value="stories" className="flex items-center space-x-1 text-xs px-3 py-2 whitespace-nowrap">
+                <Users className="h-3 w-3" />
+                <span>Stories</span>
+              </TabsTrigger>
+              <TabsTrigger value="news" className="flex items-center space-x-1 text-xs px-3 py-2 whitespace-nowrap">
+                <FileText className="h-3 w-3" />
+                <span>News & Newsletters</span>
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
           <TabsContent value="content">
             <SiteContentManager />
+          </TabsContent>
+
+          <TabsContent value="about">
+            <AboutManager />
           </TabsContent>
 
           <TabsContent value="focus-areas">

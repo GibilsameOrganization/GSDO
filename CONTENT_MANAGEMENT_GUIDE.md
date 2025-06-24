@@ -23,7 +23,7 @@ The site now has a fully dynamic content management system that allows admins to
 ## How It Works
 
 ### Content Flow
-1. **Admin edits content** in the admin panel (`/admin`)
+1. **Admin edits content** in the admin panel (`/manage`)
 2. **Content is saved** to the `site_content` table in Supabase
 3. **Refresh trigger** is fired using the ContentContext
 4. **Frontend components** automatically refetch and display new content
@@ -39,14 +39,14 @@ Content is stored in the `site_content` table with:
 ## Testing the System
 
 ### 1. Test "Who We Are" Section
-1. Go to `/admin` and navigate to the "Site Content" tab
+1. Go to `/manage` and navigate to the "Site Content" tab
 2. Edit any of the fields (title, description, mission, vision, values)
 3. Click "Save Changes"
 4. Open the homepage (`/`) in another tab or refresh
 5. Verify the changes appear immediately
 
 ### 2. Test Focus Areas Section
-1. Go to `/admin` and navigate to the "Focus Areas" tab
+1. Go to `/manage` and navigate to the "Focus Areas" tab
 2. Add, edit, or remove focus areas
 3. Change titles, descriptions, icons, or colors
 4. Click "Save Changes"

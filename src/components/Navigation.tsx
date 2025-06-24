@@ -1,4 +1,3 @@
-
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
@@ -37,8 +36,12 @@ const Navigation = () => {
           {/* Logo */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-royal-blue rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">G</span>
+              <div className="w-10 h-10 rounded-lg overflow-hidden">
+                <img 
+                  src="https://zpnoanzthieyqjwkvelw.supabase.co/storage/v1/object/public/photos//IMG_4436.jpeg" 
+                  alt="GSDO Logo" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <span className="text-xl font-bold text-gsdo-black">GSDO</span>
@@ -58,40 +61,27 @@ const Navigation = () => {
               </Link>
             ))}
             
-            {/* Auth Buttons */}
-            <div className="flex items-center space-x-2">
-              {user ? (
-                <>
-                  {isAdmin && (
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      onClick={() => navigate('/admin')}
-                    >
-                      Admin
-                    </Button>
-                  )}
+            {/* Auth Buttons - Only show for authenticated users */}
+            {user && (
+              <div className="flex items-center space-x-2">
+                {isAdmin && (
                   <Button 
                     variant="outline" 
                     size="sm"
-                    onClick={handleSignOut}
+                    onClick={() => navigate('/manage')}
                   >
-                    Sign Out
+                    Admin
                   </Button>
-                </>
-              ) : (
-                // Only show Sign In button on the auth page
-                location.pathname === '/auth' && (
-                  <Button 
-                    variant="outline" 
-                    size="sm"
-                    onClick={() => navigate('/auth')}
-                  >
-                    Sign In
-                  </Button>
-                )
-              )}
-            </div>
+                )}
+                <Button 
+                  variant="outline" 
+                  size="sm"
+                  onClick={handleSignOut}
+                >
+                  Sign Out
+                </Button>
+              </div>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -120,52 +110,35 @@ const Navigation = () => {
                 </Link>
               ))}
               
-              {/* Mobile Auth Buttons */}
-              <div className="pt-4 border-t">
-                {user ? (
-                  <>
-                    {isAdmin && (
-                      <Button 
-                        variant="outline" 
-                        size="sm"
-                        className="w-full mb-2"
-                        onClick={() => {
-                          navigate('/admin');
-                          setIsMenuOpen(false);
-                        }}
-                      >
-                        Admin
-                      </Button>
-                    )}
+              {/* Mobile Auth Buttons - Only show for authenticated users */}
+              {user && (
+                <div className="pt-4 border-t">
+                  {isAdmin && (
                     <Button 
                       variant="outline" 
                       size="sm"
-                      className="w-full"
+                      className="w-full mb-2"
                       onClick={() => {
-                        handleSignOut();
+                        navigate('/manage');
                         setIsMenuOpen(false);
                       }}
                     >
-                      Sign Out
+                      Admin
                     </Button>
-                  </>
-                ) : (
-                  // Only show Sign In button on the auth page
-                  location.pathname === '/auth' && (
-                    <Button 
-                      variant="outline" 
-                      size="sm"
-                      className="w-full"
-                      onClick={() => {
-                        navigate('/auth');
-                        setIsMenuOpen(false);
-                      }}
-                    >
-                      Sign In
-                    </Button>
-                  )
-                )}
-              </div>
+                  )}
+                  <Button 
+                    variant="outline" 
+                    size="sm"
+                    className="w-full"
+                    onClick={() => {
+                      handleSignOut();
+                      setIsMenuOpen(false);
+                    }}
+                  >
+                    Sign Out
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         )}

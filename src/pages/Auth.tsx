@@ -18,12 +18,12 @@ const Auth = () => {
   React.useEffect(() => {
     if (user) {
       if (isAdmin) {
-        navigate('/admin');
+        navigate('/manage');  // Redirect admin users to /manage
       } else {
         navigate('/');
       }
     }
-  }, [user, isAdmin]); // Removed navigate from dependencies as it is stable and does not change.
+  }, [user, isAdmin, navigate]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();

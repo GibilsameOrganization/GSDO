@@ -114,7 +114,7 @@ const AboutManager = () => {
     try {
       const contentData = {
         section_key: 'about_page',
-        content: formData,
+        content: formData as any, // Type assertion to handle Json type
         updated_by: user?.id,
       };
 
@@ -445,4 +445,4 @@ const AboutManager = () => {
   );
 };
 
-export default AboutManager; 
+export default AboutManager;

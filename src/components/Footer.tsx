@@ -1,4 +1,3 @@
-
 import { Link } from "react-router-dom";
 import NewsletterSignup from "./NewsletterSignup";
 
@@ -10,8 +9,12 @@ const Footer = () => {
           {/* Logo and Mission */}
           <div className="md:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-royal-blue rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">G</span>
+              <div className="w-10 h-10 rounded-lg overflow-hidden">
+                <img 
+                  src="https://zpnoanzthieyqjwkvelw.supabase.co/storage/v1/object/public/photos//IMG_4436.jpeg" 
+                  alt="GSDO Logo" 
+                  className="w-full h-full object-cover"
+                />
               </div>
               <div>
                 <span className="text-xl font-bold">GSDO</span>
@@ -42,17 +45,27 @@ const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">Contact Us</h4>
             <div className="space-y-2 text-gray-300">
-              <p>123 Development Street</p>
-              <p>Global City, GC 12345</p>
-              <p>+1 (555) 123-4567</p>
-              <p>info@gsdo.org</p>
+              <p>J957+WMM, ERG, SNG, SL</p>
+              <p>+252-637779273</p>
+              <p>+252-657043360</p>
+              <p className="font-medium">Gibilsame NGO</p>
+              <a href="mailto:info@gibilsame.org" className="text-royal-blue hover:text-blue-300 transition-colors">
+                info@gibilsame.org
+              </a>
             </div>
             
             {/* Social Media */}
             <div className="mt-6">
               <h4 className="font-semibold mb-3">Follow Us</h4>
               <div className="flex space-x-4">
-                <a href="#" className="text-gray-300 hover:text-royal-blue transition-colors">Facebook</a>
+                <a 
+                  href="https://www.facebook.com/share/1CLnjJy3LG/" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-royal-blue transition-colors"
+                >
+                  Facebook
+                </a>
                 <a href="#" className="text-gray-300 hover:text-royal-blue transition-colors">Twitter</a>
                 <a href="#" className="text-gray-300 hover:text-royal-blue transition-colors">LinkedIn</a>
               </div>

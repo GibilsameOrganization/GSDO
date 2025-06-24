@@ -24,7 +24,9 @@ const Index = () => {
       
       {/* Other sections load as they come into view */}
       <LazySection minHeight="300px">
-        <WhoWeAre />
+        <div id="who-we-are">
+          <WhoWeAre />
+        </div>
       </LazySection>
       
       <LazySection minHeight="250px">

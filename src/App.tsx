@@ -8,6 +8,7 @@ import { AuthProvider } from "@/contexts/AuthContext";
 import { ContentProvider } from "@/contexts/ContentContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
 import React from "react";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 // Lazy load pages
 const Index = React.lazy(() => import("./pages/Index"));
@@ -32,42 +33,44 @@ const PageLoader = () => (
 );
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <ContentProvider>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <BrowserRouter>
-            <Suspense fallback={<PageLoader />}>
-              <Routes>
-                <Route path="/" element={<Index />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/our-work" element={<OurWork />} />
-                <Route path="/get-involved" element={<GetInvolved />} />
-                <Route path="/news" element={<News />} />
-                <Route path="/contact" element={<Contact />} />
-                <Route path="/donate" element={<Donate />} />
-                <Route path="/donation-confirmation" element={<DonationConfirmation />} />
-                <Route path="/auth" element={<Auth />} />
-                <Route 
-                  path="/manage" 
-                  element={
-                    <ProtectedRoute adminOnly>
-                      <Admin />
-                    </ProtectedRoute>
-                  } 
-                />
-                {/* /admin path does NOT exist - will return 404 */}
-                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                <Route path="*" element={<NotFound />} />
-              </Routes>
-            </Suspense>
-          </BrowserRouter>
-        </TooltipProvider>
-      </ContentProvider>
-    </AuthProvider>
-  </QueryClientProvider>
+  <ErrorBoundary>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <ContentProvider>
+          <TooltipProvider>
+            <Toaster />
+            <Sonner />
+            <BrowserRouter>
+              <Suspense fallback={<PageLoader />}>
+                <Routes>
+                  <Route path="/" element={<Index />} />
+                  <Route path="/about" element={<About />} />
+                  <Route path="/our-work" element={<OurWork />} />
+                  <Route path="/get-involved" element={<GetInvolved />} />
+                  <Route path="/news" element={<News />} />
+                  <Route path="/contact" element={<Contact />} />
+                  <Route path="/donate" element={<Donate />} />
+                  <Route path="/donation-confirmation" element={<DonationConfirmation />} />
+                  <Route path="/auth" element={<Auth />} />
+                  <Route 
+                    path="/manage" 
+                    element={
+                      <ProtectedRoute adminOnly>
+                        <Admin />
+                      </ProtectedRoute>
+                    } 
+                  />
+                  {/* /admin path does NOT exist - will return 404 */}
+                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              </Suspense>
+            </BrowserRouter>
+          </TooltipProvider>
+        </ContentProvider>
+      </AuthProvider>
+    </QueryClientProvider>
+  </ErrorBoundary>
 );
 
 export default App;

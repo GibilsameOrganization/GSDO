@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -28,6 +27,7 @@ const HeroSlidesManager = () => {
     title: '',
     subtitle: '',
     image_url: '',
+    active: true,
   });
   const { toast } = useToast();
 
@@ -59,6 +59,7 @@ const HeroSlidesManager = () => {
     const slideData = {
       ...formData,
       order_index: editingSlide ? editingSlide.order_index : (slides.length + 1),
+      active: formData.active,
     };
 
     if (editingSlide) {
@@ -131,6 +132,7 @@ const HeroSlidesManager = () => {
       title: '',
       subtitle: '',
       image_url: '',
+      active: true,
     });
     setEditingSlide(null);
   };
@@ -141,8 +143,30 @@ const HeroSlidesManager = () => {
       title: slide.title,
       subtitle: slide.subtitle,
       image_url: slide.image_url,
+      active: slide.active ?? true,
     });
     setIsDialogOpen(true);
+  };
+
+  const toggleSlideActive = async (id: string, currentActive: boolean | null) => {
+    const { error } = await supabase
+      .from('hero_slides')
+      .update({ active: !currentActive })
+      .eq('id', id);
+
+    if (error) {
+      toast({
+        title: "Error updating slide status",
+        description: error.message,
+        variant: "destructive",
+      });
+    } else {
+      toast({
+        title: "Success",
+        description: `Slide ${!currentActive ? 'activated' : 'deactivated'} successfully!`,
+      });
+      fetchSlides();
+    }
   };
 
   if (loading) {
@@ -199,6 +223,18 @@ const HeroSlidesManager = () => {
                   required
                 />
               </div>
+              <div className="space-y-2">
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="checkbox"
+                    id="active"
+                    checked={formData.active}
+                    onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
+                    className="h-4 w-4 text-royal-blue focus:ring-royal-blue border-gray-300 rounded"
+                  />
+                  <Label htmlFor="active">Active (show on website)</Label>
+                </div>
+              </div>
               <Button type="submit" className="w-full bg-royal-blue hover:bg-blue-700">
                 {editingSlide ? 'Update Slide' : 'Create Slide'}
               </Button>
@@ -209,7 +245,7 @@ const HeroSlidesManager = () => {
 
       <div className="grid gap-4">
         {slides.map((slide) => (
-          <Card key={slide.id}>
+          <Card key={slide.id} className={`${slide.active ? 'border-green-200 bg-green-50' : 'border-gray-200 bg-gray-50'}`}>
             <CardContent className="p-4">
               <div className="flex items-center space-x-4">
                 <img
@@ -218,11 +254,28 @@ const HeroSlidesManager = () => {
                   className="w-20 h-20 object-cover rounded"
                 />
                 <div className="flex-1">
-                  <h4 className="font-semibold text-gsdo-black">{slide.title}</h4>
+                  <div className="flex items-center space-x-2 mb-1">
+                    <h4 className="font-semibold text-gsdo-black">{slide.title}</h4>
+                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                      slide.active 
+                        ? 'bg-green-100 text-green-800' 
+                        : 'bg-gray-100 text-gray-800'
+                    }`}>
+                      {slide.active ? 'Active' : 'Inactive'}
+                    </span>
+                  </div>
                   <p className="text-sm text-gray-600">{slide.subtitle}</p>
                   <p className="text-xs text-gray-500">Order: {slide.order_index}</p>
                 </div>
                 <div className="flex space-x-2">
+                  <Button
+                    onClick={() => toggleSlideActive(slide.id, slide.active)}
+                    variant={slide.active ? "outline" : "default"}
+                    size="sm"
+                    className={slide.active ? "border-green-500 text-green-600 hover:bg-green-50" : "bg-green-600 hover:bg-green-700 text-white"}
+                  >
+                    {slide.active ? 'Deactivate' : 'Activate'}
+                  </Button>
                   <Button
                     onClick={() => openEditDialog(slide)}
                     variant="outline"
@@ -242,6 +295,11 @@ const HeroSlidesManager = () => {
             </CardContent>
           </Card>
         ))}
+        {slides.length === 0 && (
+          <div className="text-center py-8 text-gray-500">
+            <p>No hero slides found. Create your first slide to get started!</p>
+          </div>
+        )}
       </div>
     </div>
   );

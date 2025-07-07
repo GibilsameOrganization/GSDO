@@ -1,4 +1,3 @@
-
 import { Heart, Users, Megaphone, DollarSign, Mail } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -89,30 +88,6 @@ const GetInvolvedSection = () => {
               </div>
             );
           })}
-        </div>
-
-        {/* Call to Action Banner */}
-        <div className="mt-16 bg-gradient-to-r from-royal-blue to-blue-700 rounded-lg p-8 md:p-12 text-center text-white">
-          <h3 className="text-2xl md:text-3xl font-bold mb-4">
-            Join the Movement for Global Sustainability
-          </h3>
-          <p className="text-xl mb-8 text-blue-100 max-w-3xl mx-auto">
-            Together, we can build a world where everyone has the opportunity to thrive. Your support makes the difference.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button 
-              onClick={() => navigate('/donate')}
-              className="bg-white text-royal-blue hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors"
-            >
-              Donate Now
-            </button>
-            <button 
-              onClick={() => navigate('/about')}
-              className="border-2 border-white text-white hover:bg-white hover:text-royal-blue px-8 py-3 rounded-lg font-semibold transition-colors"
-            >
-              Learn More
-            </button>
-          </div>
         </div>
       </div>
     </section>

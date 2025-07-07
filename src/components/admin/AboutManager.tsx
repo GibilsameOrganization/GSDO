@@ -10,6 +10,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import { useContent } from '@/contexts/ContentContext';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { PlusCircle, Trash2 } from 'lucide-react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 interface AboutContentData {
   hero: {
@@ -270,15 +272,15 @@ const AboutManager = () => {
 
                 <div className="space-y-2">
                   <Label htmlFor="hero-subtitle">Subtitle</Label>
-                  <Textarea
+                  <ReactQuill
                     id="hero-subtitle"
                     value={formData.hero.subtitle}
-                    onChange={(e) => setFormData({
+                    onChange={(value) => setFormData({
                       ...formData,
-                      hero: { ...formData.hero, subtitle: e.target.value }
+                      hero: { ...formData.hero, subtitle: value }
                     })}
+                    theme="snow"
                     placeholder="Brief description about your organization"
-                    required
                   />
                 </div>
               </CardContent>
@@ -312,12 +314,11 @@ const AboutManager = () => {
                   <Label>Paragraphs</Label>
                   {formData.ourStory.paragraphs.map((paragraph, index) => (
                     <div key={index} className="flex gap-2">
-                      <Textarea
+                      <ReactQuill
                         value={paragraph}
-                        onChange={(e) => updateParagraph(index, e.target.value)}
-                        className="min-h-[120px]"
+                        onChange={(value) => updateParagraph(index, value)}
+                        theme="snow"
                         placeholder={`Paragraph ${index + 1}`}
-                        required
                       />
                       {formData.ourStory.paragraphs.length > 1 && (
                         <Button

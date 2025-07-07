@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -30,6 +29,7 @@ const ImpactMetricsManager = () => {
     value: '',
     label: '',
     description: '',
+    active: true,
   });
   const { toast } = useToast();
 
@@ -64,6 +64,7 @@ const ImpactMetricsManager = () => {
       label: formData.label,
       description: formData.description || null,
       order_index: editingMetric ? editingMetric.order_index : (metrics.length + 1),
+      active: formData.active,
     };
 
     if (editingMetric) {
@@ -137,6 +138,7 @@ const ImpactMetricsManager = () => {
       value: '',
       label: '',
       description: '',
+      active: true,
     });
     setEditingMetric(null);
   };
@@ -148,6 +150,7 @@ const ImpactMetricsManager = () => {
       value: metric.value.toString(),
       label: metric.label,
       description: metric.description || '',
+      active: metric.active ?? true,
     });
     setIsDialogOpen(true);
   };
@@ -216,6 +219,16 @@ const ImpactMetricsManager = () => {
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   placeholder="Brief description of the metric"
                 />
+              </div>
+              <div className="flex items-center space-x-2">
+                <input
+                  id="active"
+                  type="checkbox"
+                  checked={formData.active}
+                  onChange={(e) => setFormData({ ...formData, active: e.target.checked })}
+                  className="form-checkbox h-5 w-5 text-royal-blue"
+                />
+                <Label htmlFor="active">Active (show on homepage)</Label>
               </div>
               <Button type="submit" className="w-full bg-royal-blue hover:bg-blue-700">
                 {editingMetric ? 'Update Metric' : 'Create Metric'}

@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
@@ -11,6 +10,8 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { Plus, Edit, Trash2, Eye } from 'lucide-react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 interface NewsArticle {
   id: string;
@@ -208,7 +209,7 @@ const NewsManager = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="excerpt">Excerpt</Label>
-                <Textarea
+                <Input
                   id="excerpt"
                   value={formData.excerpt}
                   onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
@@ -217,12 +218,11 @@ const NewsManager = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="content">Content</Label>
-                <Textarea
+                <ReactQuill
                   id="content"
                   value={formData.content}
-                  onChange={(e) => setFormData({ ...formData, content: e.target.value })}
-                  className="min-h-[200px]"
-                  required
+                  onChange={(value) => setFormData({ ...formData, content: value })}
+                  theme="snow"
                 />
               </div>
               <div className="space-y-2">

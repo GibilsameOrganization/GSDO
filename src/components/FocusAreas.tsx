@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { DollarSign, Utensils, Heart, Users, Handshake, LucideIcon } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
@@ -142,7 +141,9 @@ const FocusAreas = () => {
                   <IconComponent size={24} />
                 </div>
                 <h3 className="text-xl font-semibold text-gsdo-black mb-3">{area.title}</h3>
-                <p className="text-gray-600">{area.description}</p>
+                <p className="text-gray-600" 
+                   dangerouslySetInnerHTML={{ __html: area.description }}>
+                </p>
               </div>
             );
           })}

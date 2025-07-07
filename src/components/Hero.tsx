@@ -149,8 +149,8 @@ const Hero = () => {
                 {slides[currentSlide].title}
               </span>
             </h1>
-            <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-4xl mx-auto leading-relaxed animate-fade-in animation-delay-200">
-              {slides[currentSlide].subtitle}
+            <p className="text-xl md:text-2xl mb-8 text-gray-200 max-w-4xl mx-auto leading-relaxed animate-fade-in animation-delay-200"
+               dangerouslySetInnerHTML={{ __html: slides[currentSlide].subtitle }}>
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-in animation-delay-400">
               <Button 

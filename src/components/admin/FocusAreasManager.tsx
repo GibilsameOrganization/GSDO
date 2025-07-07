@@ -1,15 +1,15 @@
-
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { useContent } from '@/contexts/ContentContext';
 import { Trash2, Plus } from 'lucide-react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 interface FocusArea {
   title: string;
@@ -170,12 +170,12 @@ const FocusAreasManager = () => {
 
                   <div className="space-y-2 md:col-span-2">
                     <Label htmlFor={`description-${index}`}>Description</Label>
-                    <Textarea
+                    <ReactQuill
                       id={`description-${index}`}
                       value={area.description}
-                      onChange={(e) => updateFocusArea(index, 'description', e.target.value)}
+                      onChange={(value) => updateFocusArea(index, 'description', value)}
+                      theme="snow"
                       placeholder="Focus area description"
-                      required
                     />
                   </div>
                 </div>

@@ -95,8 +95,8 @@ const About = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-6xl font-bold mb-6">{content.hero.title}</h1>
-            <p className="text-xl md:text-2xl text-blue-100">
-              {content.hero.subtitle}
+            <p className="text-xl md:text-2xl text-blue-100"
+               dangerouslySetInnerHTML={{ __html: content.hero.subtitle }}>
             </p>
           </div>
         </div>
@@ -109,12 +109,12 @@ const About = () => {
             <h2 className="text-3xl md:text-4xl font-bold text-gsdo-black mb-8 text-center">{content.ourStory.title}</h2>
             <div className="prose prose-lg mx-auto text-gray-600">
               {content.ourStory.paragraphs.map((paragraph, index) => (
-                <p 
+                <div 
                   key={index} 
                   className={`${index === 0 ? "text-xl" : "text-lg"} leading-relaxed ${index < content.ourStory.paragraphs.length - 1 ? "mb-6" : ""}`}
+                  dangerouslySetInnerHTML={{ __html: paragraph }}
                 >
-                  {paragraph}
-                </p>
+                </div>
               ))}
             </div>
           </div>

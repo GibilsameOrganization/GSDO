@@ -22,6 +22,8 @@ const DonationConfirmation = React.lazy(() => import("./pages/DonationConfirmati
 const Auth = React.lazy(() => import("./pages/Auth"));
 const Admin = React.lazy(() => import("./pages/Admin"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
+const NewsArticle = React.lazy(() => import("./pages/NewsArticle"));
+const StoryDetail = React.lazy(() => import("./pages/StoryDetail"));
 
 const queryClient = new QueryClient();
 
@@ -48,6 +50,8 @@ const App = () => (
                   <Route path="/our-work" element={<OurWork />} />
                   <Route path="/get-involved" element={<GetInvolved />} />
                   <Route path="/news" element={<News />} />
+                  <Route path="/news/:id" element={<NewsArticle />} />
+                  <Route path="/stories/:id" element={<StoryDetail />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/donate" element={<Donate />} />
                   <Route path="/donation-confirmation" element={<DonationConfirmation />} />

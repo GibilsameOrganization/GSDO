@@ -95,21 +95,27 @@ const WhoWeAre = () => {
           <h2 className="text-3xl md:text-4xl font-bold text-gsdo-black mb-6">
             {content.title}
           </h2>
-          <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-            {content.description}
+          <p className="text-xl text-gray-600 mb-8 leading-relaxed"
+             dangerouslySetInnerHTML={{ __html: content.description }}>
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
             <div className="text-center">
               <h3 className="text-xl font-semibold text-gsdo-black mb-2">Our Mission</h3>
-              <p className="text-gray-600">{content.mission}</p>
+              <p className="text-gray-600" 
+                 dangerouslySetInnerHTML={{ __html: content.mission }}>
+              </p>
             </div>
             <div className="text-center">
               <h3 className="text-xl font-semibold text-gsdo-black mb-2">Our Vision</h3>
-              <p className="text-gray-600">{content.vision}</p>
+              <p className="text-gray-600" 
+                 dangerouslySetInnerHTML={{ __html: content.vision }}>
+              </p>
             </div>
             <div className="text-center">
               <h3 className="text-xl font-semibold text-gsdo-black mb-2">Our Values</h3>
-              <p className="text-gray-600">{content.values}</p>
+              <p className="text-gray-600" 
+                 dangerouslySetInnerHTML={{ __html: content.values }}>
+              </p>
             </div>
           </div>
         </div>

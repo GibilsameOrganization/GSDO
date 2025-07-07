@@ -1,14 +1,14 @@
-
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Edit, Trash2 } from 'lucide-react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 interface Story {
   id: string;
@@ -190,11 +190,11 @@ const StoriesManager = () => {
               </div>
               <div className="space-y-2">
                 <Label htmlFor="excerpt">Excerpt</Label>
-                <Textarea
+                <ReactQuill
                   id="excerpt"
                   value={formData.excerpt}
-                  onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
-                  required
+                  onChange={(value) => setFormData({ ...formData, excerpt: value })}
+                  theme="snow"
                 />
               </div>
               <div className="space-y-2">

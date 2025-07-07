@@ -1,14 +1,14 @@
-
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { useAuth } from '@/contexts/AuthContext';
 import { useContent } from '@/contexts/ContentContext';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 interface SiteContentData {
   title: string;
@@ -151,47 +151,46 @@ const SiteContentManager = () => {
 
             <div className="space-y-2">
               <Label htmlFor="description">Main Description</Label>
-              <Textarea
+              <ReactQuill
                 id="description"
                 value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                className="min-h-[120px]"
+                onChange={(value) => setFormData({ ...formData, description: value })}
+                theme="snow"
                 placeholder="Main description of your organization..."
-                required
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="mission">Our Mission</Label>
-                <Textarea
+                <ReactQuill
                   id="mission"
                   value={formData.mission}
-                  onChange={(e) => setFormData({ ...formData, mission: e.target.value })}
+                  onChange={(value) => setFormData({ ...formData, mission: value })}
+                  theme="snow"
                   placeholder="Your organization's mission..."
-                  required
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="vision">Our Vision</Label>
-                <Textarea
+                <ReactQuill
                   id="vision"
                   value={formData.vision}
-                  onChange={(e) => setFormData({ ...formData, vision: e.target.value })}
+                  onChange={(value) => setFormData({ ...formData, vision: value })}
+                  theme="snow"
                   placeholder="Your organization's vision..."
-                  required
                 />
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="values">Our Values</Label>
-                <Textarea
+                <ReactQuill
                   id="values"
                   value={formData.values}
-                  onChange={(e) => setFormData({ ...formData, values: e.target.value })}
+                  onChange={(value) => setFormData({ ...formData, values: value })}
+                  theme="snow"
                   placeholder="Your organization's values..."
-                  required
                 />
               </div>
             </div>

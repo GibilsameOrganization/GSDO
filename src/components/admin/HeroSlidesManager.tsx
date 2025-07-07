@@ -3,11 +3,12 @@ import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import { Plus, Edit, Trash2, ArrowUp, ArrowDown } from 'lucide-react';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 interface HeroSlide {
   id: string;
@@ -204,15 +205,16 @@ const HeroSlidesManager = () => {
                   required
                 />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="subtitle">Subtitle</Label>
-                <Textarea
-                  id="subtitle"
-                  value={formData.subtitle}
-                  onChange={(e) => setFormData({ ...formData, subtitle: e.target.value })}
-                  required
-                />
-              </div>
+                              <div className="space-y-2">
+                  <Label htmlFor="subtitle">Subtitle</Label>
+                  <ReactQuill
+                    id="subtitle"
+                    value={formData.subtitle}
+                    onChange={(value) => setFormData({ ...formData, subtitle: value })}
+                    theme="snow"
+                    placeholder="Slide subtitle"
+                  />
+                </div>
               <div className="space-y-2">
                 <Label htmlFor="image_url">Image URL</Label>
                 <Input

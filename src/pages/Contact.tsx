@@ -1,4 +1,3 @@
-
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
@@ -39,9 +38,8 @@ const Contact = () => {
               </div>
               <h3 className="text-xl font-semibold text-gsdo-black mb-2">Visit Our Office</h3>
               <p className="text-gray-600">
-                123 Development Street<br />
-                Global City, GC 12345<br />
-                Monday - Friday: 9AM - 5PM
+                J957+WMM, ERG, SNG, SL<br />
+                Gibilsame NGO
               </p>
             </div>
 
@@ -52,8 +50,8 @@ const Contact = () => {
               </div>
               <h3 className="text-xl font-semibold text-gsdo-black mb-2">Call Us</h3>
               <p className="text-gray-600">
-                +1 (555) 123-4567<br />
-                Available during business hours
+                +252-637779273<br />
+                +252-657043360
               </p>
             </div>
 
@@ -64,7 +62,7 @@ const Contact = () => {
               </div>
               <h3 className="text-xl font-semibold text-gsdo-black mb-2">Email Us</h3>
               <p className="text-gray-600">
-                info@gsdo.org<br />
+                info@gibilsame.org<br />
                 We'll respond within 24 hours
               </p>
             </div>

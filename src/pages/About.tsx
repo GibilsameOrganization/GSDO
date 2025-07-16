@@ -3,6 +3,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { useContent } from "@/contexts/ContentContext";
+import WhoWeAre from "@/components/WhoWeAre";
 
 interface AboutContentData {
   hero: {
@@ -102,20 +103,74 @@ const About = () => {
         </div>
       </section>
 
+      {/* Who We Are Section */}
+      <WhoWeAre />
+
       {/* Our Story Section */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold text-gsdo-black mb-8 text-center">{content.ourStory.title}</h2>
-            <div className="prose prose-lg mx-auto text-gray-600">
-              {content.ourStory.paragraphs.map((paragraph, index) => (
-                <div 
-                  key={index} 
-                  className={`${index === 0 ? "text-xl" : "text-lg"} leading-relaxed ${index < content.ourStory.paragraphs.length - 1 ? "mb-6" : ""}`}
-                  dangerouslySetInnerHTML={{ __html: paragraph }}
-                >
+            {/* Story Header */}
+            <div className="text-center mb-12">
+              <h2 className="text-4xl md:text-5xl font-bold text-gsdo-black mb-6">
+                {content.ourStory.title}
+              </h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-royal-blue to-blue-600 mx-auto"></div>
+            </div>
+
+            {/* Story Content Card */}
+            <div className="bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
+              <div className="space-y-8">
+                {content.ourStory.paragraphs.map((paragraph, index) => (
+                  <div key={index} className="group">
+                    <div className="flex items-start space-x-4">
+                      {/* Timeline dot */}
+                      <div className="flex-shrink-0 w-4 h-4 bg-gradient-to-br from-royal-blue to-blue-600 rounded-full mt-2"></div>
+                      
+                      {/* Content */}
+                      <div className="flex-1">
+                        <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-left"
+                           dangerouslySetInnerHTML={{ __html: paragraph }}>
+                        </p>
+                        
+                        {/* Decorative line after each paragraph except the last */}
+                        {index < content.ourStory.paragraphs.length - 1 && (
+                          <div className="mt-6 w-16 h-0.5 bg-gradient-to-r from-royal-blue to-blue-600 opacity-30"></div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Story Footer */}
+              <div className="mt-12 pt-8 border-t border-gray-100">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-royal-blue to-blue-600 rounded-xl flex items-center justify-center">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-royal-blue">Established 2009</p>
+                      <p className="text-xs text-gray-500">Over 15 years of impact</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center space-x-4">
+                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
+                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5a2 2 0 002 2h1a2 2 0 002-2V3.935M8 3.935V3a2 2 0 012-2h1a2 2 0 012 2v.935M8 3.935V5a2 2 0 002 2h1a2 2 0 002-2V3.935" />
+                      </svg>
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-green-600">25+ Countries</p>
+                      <p className="text-xs text-gray-500">Global reach</p>
+                    </div>
+                  </div>
                 </div>
-              ))}
+              </div>
             </div>
           </div>
         </div>

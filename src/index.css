@@ -3,6 +3,200 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ===============  RESET  =============== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  font-family: "Inter", sans-serif;
+  line-height: 1.45;
+  background: #ffffff;
+  color: #101010;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 800;
+}
+
+/* ===============  NAVIGATION  =============== */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem !important;
+  }
+  
+  .nav-links {
+    display: none !important;
+  }
+  
+  .hamburger {
+    display: flex !important;
+  }
+  
+  /* Mobile menu styles */
+  .nav-toggle:checked ~ .nav-links {
+    display: flex !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    background: #0056d9 !important;
+    padding: 1rem !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+    gap: 1rem !important;
+  }
+  
+  .nav-links li {
+    width: 100% !important;
+  }
+  
+  .nav-links a,
+  .nav-links button {
+    width: 100% !important;
+    text-align: center !important;
+    padding: 0.75rem !important;
+  }
+}
+
+/* ===============  HERO  =============== */
+.hero {
+  position: relative !important;
+  width: 100% !important;
+  min-height: 640px !important; /* ~ the height in the screenshot */
+  display: grid !important;
+  grid-template-columns: 45% 55% !important;
+  overflow: hidden !important;
+  isolation: isolate !important; /* create new stacking context */
+}
+/* blue wedge on the left with curved edge */
+.hero::before {
+  content: none !important;
+}
+
+.hero__content {
+  padding: 4rem 2rem 3.5rem 2rem !important;
+  color: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+.hero__title {
+  font-size: clamp(2.4rem, 2.2vw + 1.8rem, 3.4rem) !important;
+  line-height: 1.08 !important;
+  margin-bottom: 2rem !important;
+}
+.hero__subtitle {
+  font-size: 1rem !important;
+  max-width: 28ch !important;
+  margin-bottom: 2.5rem !important;
+}
+.btn-primary {
+  background: #ff7b2e !important;
+  padding: 0.9rem 2.2rem !important;
+  border: none !important;
+  border-radius: 4px !important;
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  color: #ffffff !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  transition: filter 0.2s ease !important;
+}
+.btn-primary:hover,
+.btn-primary:focus {
+  filter: brightness(1.1) !important;
+}
+
+/* little downward chevron */
+.hero__chevron {
+  margin-top: 3.5rem !important;
+  font-size: 1.5rem !important;
+  color: #ffffff !important;
+}
+
+/* right side hero image (keeps aspect‑ratio) */
+.hero__image {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: right center !important;
+}
+
+/* ===============  STRAPLINE  =============== */
+.strapline {
+  padding: 4rem 1rem !important;
+  text-align: center !important;
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  max-width: 840px !important;
+  margin-inline: auto !important;
+}
+
+/* ===============  VALUE CARDS  =============== */
+.values {
+  background: #0056d9 !important;
+  color: #ffffff !important;
+  padding: 4rem 1rem 5rem !important;
+}
+.values__grid {
+  --card-min: 280px !important;
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(var(--card-min), 1fr)) !important;
+  gap: 2.5rem 1.5rem !important;
+  max-width: 920px !important;
+  margin-inline: auto !important;
+}
+.card {
+  display: flex !important;
+  gap: 1.25rem !important;
+}
+.card img {
+  width: 120px !important;
+  height: 120px !important;
+  object-fit: cover !important;
+  border-radius: 4px !important;
+}
+.card h3 {
+  font-size: 1.125rem !important;
+  margin-bottom: 0.6rem !important;
+}
+.card p {
+  font-size: 0.9rem !important;
+  line-height: 1.35 !important;
+}
+
+/* ===============  MEDIA  =============== */
+@media (max-width: 780px) {
+  .hero {
+    grid-template-columns: 1fr !important;
+  }
+  .hero__image {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: -2 !important;
+    opacity: 0.25 !important; /* darker overlay for text readability on mobile */
+  }
+  .hero::before {
+    clip-path: none !important;
+  }
+}
+
+/* ===== EXISTING STYLES ===== */
 @layer base {
   :root {
     --background: 0 0% 100%;

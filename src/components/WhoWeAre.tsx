@@ -1,23 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import { supabase } from '@/integrations/supabase/client';
-import { useContent } from '@/contexts/ContentContext';
+import React, { useState, useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useContent } from "@/contexts/ContentContext";
 
 interface WhoWeAreContent {
   title: string;
   description: string;
   mission: string;
   vision: string;
-  values: string;
 }
 
 const WhoWeAre = () => {
   const { sectionRefreshTriggers } = useContent();
   const [content, setContent] = useState<WhoWeAreContent>({
     title: 'Who We Are',
-    description: 'Gibilsame Sustainable Development Organization (GSDO) is an international NGO dedicated to creating lasting change in communities worldwide. Through sustainable development initiatives, humanitarian aid, and advocacy for social equity, we work to ensure that everyone has the opportunity to build a better future.',
+    description: 'The Gibilsame Sustainable Development Organisation (GSDO) is an independent, non-governmental, and non-profit organisation founded on January 1st, 2025, by a dedicated group of professionals and community activists in Somaliland.',
     mission: 'Empowering communities through sustainable development and humanitarian action',
     vision: 'A world where all people have equal opportunities to thrive and prosper',
-    values: 'Integrity, inclusivity, innovation, and impact in everything we do',
   });
   const [loading, setLoading] = useState(true);
 
@@ -52,7 +50,6 @@ const WhoWeAre = () => {
           description: fetchedContent.description || content.description,
           mission: fetchedContent.mission || content.mission,
           vision: fetchedContent.vision || content.vision,
-          values: fetchedContent.values || content.values,
         });
       } else {
         console.log('WhoWeAre: No content found in database, using defaults');
@@ -66,22 +63,21 @@ const WhoWeAre = () => {
 
   if (loading) {
     return (
-      <section className="py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-4xl mx-auto text-center">
+      <section className="py-20 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
             <div className="animate-pulse">
-              <div className="h-8 bg-gray-200 rounded w-1/3 mx-auto mb-6"></div>
-              <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
-              <div className="h-4 bg-gray-200 rounded w-5/6 mx-auto mb-8"></div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-                {[1, 2, 3].map((i) => (
-                  <div key={i} className="text-center">
-                    <div className="h-6 bg-gray-200 rounded w-2/3 mx-auto mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-full"></div>
-                  </div>
-                ))}
-              </div>
+              <div className="h-12 bg-gray-200 rounded mb-8 max-w-2xl mx-auto"></div>
             </div>
+          </div>
+          <div className="space-y-6">
+            {Array.from({ length: 2 }).map((_, index) => (
+              <div key={index} className="animate-pulse">
+                <div className="h-6 bg-gray-200 rounded mb-4"></div>
+                <div className="h-6 bg-gray-200 rounded mb-2"></div>
+                <div className="h-6 bg-gray-200 rounded"></div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -89,32 +85,57 @@ const WhoWeAre = () => {
   }
 
   return (
-    <section className="py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gsdo-black mb-6">
+    <section className="py-20 bg-white">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header Section */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold text-gsdo-black mb-8">
             {content.title}
           </h2>
-          <p className="text-xl text-gray-600 mb-8 leading-relaxed"
-             dangerouslySetInnerHTML={{ __html: content.description }}>
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-gsdo-black mb-2">Our Mission</h3>
-              <p className="text-gray-600" 
+        </div>
+
+        {/* Content Section */}
+        <div className="space-y-8">
+          {/* Main Description */}
+          <div className="text-left">
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6"
+               dangerouslySetInnerHTML={{ __html: content.description }}>
+            </p>
+            
+            {/* Registration Info */}
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed"
+               dangerouslySetInnerHTML={{ __html: "We are officially registered with the <strong>Ministry of Planning and National Development of Somaliland</strong>, under Certificate No. L43.13.1787.2025M/J, issued on <strong>March 15th, 2025</strong>." }}>
+            </p>
+          </div>
+
+          {/* Mission and Vision */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-12">
+            {/* Mission */}
+            <div className="bg-gray-50 rounded-lg p-6 border-l-4 border-royal-blue">
+              <h3 className="text-xl font-bold text-gsdo-black mb-4">Our Mission</h3>
+              <p className="text-gray-700 leading-relaxed"
                  dangerouslySetInnerHTML={{ __html: content.mission }}>
               </p>
             </div>
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-gsdo-black mb-2">Our Vision</h3>
-              <p className="text-gray-600" 
+
+            {/* Vision */}
+            <div className="bg-gray-50 rounded-lg p-6 border-l-4 border-green-600">
+              <h3 className="text-xl font-bold text-gsdo-black mb-4">Our Vision</h3>
+              <p className="text-gray-700 leading-relaxed"
                  dangerouslySetInnerHTML={{ __html: content.vision }}>
               </p>
             </div>
-            <div className="text-center">
-              <h3 className="text-xl font-semibold text-gsdo-black mb-2">Our Values</h3>
-              <p className="text-gray-600" 
-                 dangerouslySetInnerHTML={{ __html: content.values }}>
+          </div>
+
+          {/* Why We Exist Section */}
+          <div className="mt-12 pt-8 border-t border-gray-200">
+            <h3 className="text-2xl font-bold text-gsdo-black mb-6">Why We Exist</h3>
+            <div className="text-left">
+              <p className="text-lg text-gray-700 leading-relaxed mb-4">
+                We believe that sustainable development is the pathway to lasting peace and prosperity. Our work focuses on empowering local populations, enhancing environmental sustainability, and fostering inclusive economic growth.
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed">
+                Through our integrated approach to development, we address the root causes of poverty and inequality while building resilient communities that can thrive for generations to come.
               </p>
             </div>
           </div>
@@ -125,3 +146,4 @@ const WhoWeAre = () => {
 };
 
 export default WhoWeAre;
+

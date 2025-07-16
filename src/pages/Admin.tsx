@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, Users, FileText, BarChart3, Image, Globe, Camera, Target, BookOpen } from 'lucide-react';
+import { LogOut, Users, FileText, BarChart3, Image, Globe, Camera, Target, BookOpen, Video } from 'lucide-react';
 import HeroSlidesManager from '@/components/admin/HeroSlidesManager';
 import NewsManager from '@/components/admin/NewsManager';
 import ImpactMetricsManager from '@/components/admin/ImpactMetricsManager';
@@ -13,6 +13,7 @@ import SiteContentManager from '@/components/admin/SiteContentManager';
 import PhotoManager from '@/components/admin/PhotoManager';
 import FocusAreasManager from '@/components/admin/FocusAreasManager';
 import AboutManager from '@/components/admin/AboutManager';
+import VideoManager from '@/components/admin/VideoManager';
 
 const Admin = () => {
   const { user, signOut } = useAuth();
@@ -98,6 +99,10 @@ const Admin = () => {
                 <FileText className="h-3 w-3" />
                 <span>News & Newsletters</span>
               </TabsTrigger>
+              <TabsTrigger value="videos" className="flex items-center space-x-1 text-xs px-3 py-2 whitespace-nowrap">
+                <Video className="h-3 w-3" />
+                <span>Videos</span>
+              </TabsTrigger>
             </TabsList>
           </div>
 
@@ -131,6 +136,10 @@ const Admin = () => {
 
           <TabsContent value="news">
             <NewsManager />
+          </TabsContent>
+
+          <TabsContent value="videos">
+            <VideoManager />
           </TabsContent>
         </Tabs>
       </main>

@@ -19,47 +19,47 @@ const Index = () => {
       <Navigation />
       
       {/* Hero loads immediately since it's above the fold */}
-      <LazySection minHeight="500px">
+      <LazySection minHeight="500px" className="pt-16 lg:pt-20">
         <Hero />
       </LazySection>
       
       {/* Impact Metrics */}
-      <LazySection minHeight="600px">
+      <LazySection minHeight="400px" className="py-8 md:py-12">
         <ImpactMetrics />
       </LazySection>
       
       {/* Four Pillars */}
-      <LazySection minHeight="600px">
+      <LazySection minHeight="600px" className="py-8 md:py-12">
         <FourPillars />
       </LazySection>
       
       {/* Focus Areas Section */}
-      <LazySection minHeight="500px">
+      <LazySection minHeight="500px" className="py-8 md:py-12">
         <FocusAreasSection />
       </LazySection>
       
       {/* Mission Statement with Videos */}
-      <LazySection minHeight="600px">
+      <LazySection minHeight="600px" className="py-8 md:py-12">
         <MissionStatement />
       </LazySection>
       
       {/* Newsletter Section */}
-      <LazySection minHeight="500px">
+      <LazySection minHeight="500px" className="py-8 md:py-12">
         <NewsletterSection />
       </LazySection>
       
       {/* Stories Section */}
-      <LazySection minHeight="600px">
+      <LazySection minHeight="600px" className="py-8 md:py-12">
         <StoriesSection />
       </LazySection>
       
       {/* Final CTA Banner */}
-      <LazySection minHeight="300px">
+      <LazySection minHeight="300px" className="py-8 md:py-12">
         <FinalCTABanner />
       </LazySection>
       
       {/* Footer */}
-      <LazySection minHeight="400px">
+      <LazySection minHeight="400px" className="py-8 md:py-12">
         <CareFooter />
       </LazySection>
     </div>

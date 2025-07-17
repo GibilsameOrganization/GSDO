@@ -79,39 +79,13 @@ const FourPillars = () => {
 
   if (loading) {
     return (
-      <section 
-        style={{
-          background: '#ffffff',
-          color: '#000000',
-          padding: '4rem 1rem 5rem'
-        }}
-      >
-        <div style={{
-          maxWidth: '1200px',
-          margin: '0 auto',
-          textAlign: 'center'
-        }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(2, 1fr)',
-            gap: '2rem',
-            maxWidth: '1000px',
-            margin: '0 auto'
-          }}>
+      <section className="py-12 md:py-16 lg:py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
             {Array.from({ length: 4 }).map((_, index) => (
               <div key={index} className="animate-pulse">
-                <div style={{
-                  height: '250px',
-                  background: '#e5e7eb',
-                  borderRadius: '8px',
-                  marginBottom: '0'
-                }}></div>
-                <div style={{
-                  height: '120px',
-                  background: '#0056d9',
-                  borderRadius: '0 0 8px 8px',
-                  marginTop: '0'
-                }}></div>
+                <div className="h-48 md:h-64 bg-gray-200 rounded-lg mb-0"></div>
+                <div className="h-24 md:h-32 bg-royal-blue rounded-b-lg mt-0"></div>
               </div>
             ))}
           </div>
@@ -121,50 +95,21 @@ const FourPillars = () => {
   }
 
   return (
-    <section 
-      style={{
-        background: '#ffffff',
-        color: '#000000',
-        padding: '4rem 1rem 5rem'
-      }}
-    >
-      <div style={{
-        maxWidth: '1200px',
-        margin: '0 auto',
-        textAlign: 'center'
-      }}>
+    <section className="py-12 md:py-16 lg:py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Four Pillars Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(2, 1fr)',
-          gap: '2rem',
-          maxWidth: '1000px',
-          margin: '0 auto'
-        }}>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
           {pillars.map((pillar, index) => (
             <div 
               key={index} 
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                borderRadius: '8px',
-                overflow: 'hidden',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)'
-              }}
+              className="flex flex-col rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300"
             >
               {/* Image Section */}
-              <div style={{
-                height: '250px',
-                overflow: 'hidden'
-              }}>
+              <div className="h-48 md:h-64 lg:h-72 overflow-hidden">
                 <img
                   src={pillar.image}
                   alt={pillar.title}
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover'
-                  }}
+                  className="w-full h-full object-cover"
                   onError={(e) => {
                     console.error('Failed to load pillar image:', pillar.image);
                     (e.target as HTMLImageElement).src = "https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=400&q=60";
@@ -173,31 +118,11 @@ const FourPillars = () => {
               </div>
 
               {/* Text Section */}
-              <div style={{
-                background: '#0056d9',
-                color: '#ffffff',
-                padding: '1.5rem',
-                flex: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'center'
-              }}>
-                <h3 style={{
-                  fontSize: '1.25rem',
-                  fontWeight: '700',
-                  marginBottom: '0.75rem',
-                  color: '#ffffff',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.5px'
-                }}>
+              <div className="bg-royal-blue text-white p-4 md:p-6 flex-1 flex flex-col justify-center">
+                <h3 className="text-lg md:text-xl lg:text-2xl font-bold mb-3 md:mb-4 text-white uppercase tracking-wide">
                   {cleanText(pillar.title)}
                 </h3>
-                <div style={{
-                  fontSize: '0.9rem',
-                  lineHeight: '1.5',
-                  color: 'rgba(255, 255, 255, 0.9)',
-                  margin: 0
-                }}>
+                <div className="text-sm md:text-base lg:text-lg text-blue-100 leading-relaxed">
                   {cleanText(pillar.description)}
                 </div>
               </div>

@@ -63,51 +63,6 @@ const CareFooter = () => {
             </div>
           </div>
         </div>
-
-        {/* Bottom Section */}
-        <div className="border-t border-gray-700 mt-12 pt-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Contact & Social */}
-            <div>
-              <p className="text-gray-300 mb-4">Text GSDO to 227287 to stay connected.</p>
-              <div className="flex space-x-4 mb-4">
-                <a href="#" className="text-gray-300 hover:text-white">Facebook</a>
-                <a href="#" className="text-gray-300 hover:text-white">X</a>
-                <a href="#" className="text-gray-300 hover:text-white">Instagram</a>
-                <a href="#" className="text-gray-300 hover:text-white">YouTube</a>
-                <a href="#" className="text-gray-300 hover:text-white">LinkedIn</a>
-              </div>
-              <div className="flex space-x-4">
-                <span className="text-gray-400 text-sm">Charity Navigator</span>
-                <span className="text-gray-400 text-sm">GuideStar</span>
-                <span className="text-gray-400 text-sm">BBB Wise Giving Alliance</span>
-              </div>
-            </div>
-
-            {/* Legal & Support */}
-            <div>
-              <p className="text-gray-300 mb-4">
-                If you need assistance with your donation, please call us at 1-800-422-7283 or contact us through our supporter services online form.
-              </p>
-              <p className="text-gray-400 text-sm mb-4">
-                GSDO is a 501(c)(3) not-for-profit organization. Our EIN number is 13-1665039. © 2023 GSDO. All rights reserved.
-              </p>
-              <div className="flex space-x-4 text-sm">
-                <Link to="/contact" className="text-gray-300 hover:text-white">Contact Us</Link>
-                <Link to="/privacy" className="text-gray-300 hover:text-white">Privacy Policy</Link>
-                <Link to="/terms" className="text-gray-300 hover:text-white">Terms of Use</Link>
-                <Link to="/sitemap" className="text-gray-300 hover:text-white">Sitemap</Link>
-              </div>
-            </div>
-
-            {/* reCAPTCHA */}
-            <div>
-              <p className="text-gray-400 text-sm">
-                This site is protected by reCAPTCHA and the Google Privacy Policy and Terms of Service apply.
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </footer>
   );

@@ -4,7 +4,6 @@ import { Button } from '@/components/ui/button';
 import { Heart, Mail, AlertCircle, Copy, Check, ArrowLeft } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import Navigation from '@/components/Navigation';
-import Footer from '@/components/Footer';
 
 const DonationConfirmation = () => {
   const location = useLocation();
@@ -342,7 +341,6 @@ const DonationConfirmation = () => {
         </div>
       </div>
       </div>
-      <Footer />
     </div>
   );
 };

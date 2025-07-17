@@ -7,6 +7,7 @@ import { Suspense } from "react";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ContentProvider } from "@/contexts/ContentContext";
 import ProtectedRoute from "@/components/ProtectedRoute";
+import PageLayout from "@/components/PageLayout";
 import React from "react";
 import ErrorBoundary from "./components/ErrorBoundary";
 
@@ -46,27 +47,27 @@ const App = () => (
               <Suspense fallback={<PageLoader />}>
                 <Routes>
                   <Route path="/" element={<Index />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/our-work" element={<OurWork />} />
-                  <Route path="/get-involved" element={<GetInvolved />} />
-                  <Route path="/news" element={<News />} />
-                  <Route path="/news/:id" element={<NewsArticle />} />
-                  <Route path="/stories/:id" element={<StoryDetail />} />
-                  <Route path="/contact" element={<Contact />} />
-                  <Route path="/donate" element={<Donate />} />
-                  <Route path="/donation-confirmation" element={<DonationConfirmation />} />
-                  <Route path="/auth" element={<Auth />} />
+                  <Route path="/about" element={<PageLayout><About /></PageLayout>} />
+                  <Route path="/our-work" element={<PageLayout><OurWork /></PageLayout>} />
+                  <Route path="/get-involved" element={<PageLayout><GetInvolved /></PageLayout>} />
+                  <Route path="/news" element={<PageLayout><News /></PageLayout>} />
+                  <Route path="/news/:id" element={<PageLayout><NewsArticle /></PageLayout>} />
+                  <Route path="/stories/:id" element={<PageLayout><StoryDetail /></PageLayout>} />
+                  <Route path="/contact" element={<PageLayout><Contact /></PageLayout>} />
+                  <Route path="/donate" element={<PageLayout><Donate /></PageLayout>} />
+                  <Route path="/donation-confirmation" element={<PageLayout><DonationConfirmation /></PageLayout>} />
+                  <Route path="/auth" element={<PageLayout><Auth /></PageLayout>} />
                   <Route 
                     path="/manage" 
                     element={
                       <ProtectedRoute adminOnly>
-                        <Admin />
+                        <PageLayout><Admin /></PageLayout>
                       </ProtectedRoute>
                     } 
                   />
                   {/* /admin path does NOT exist - will return 404 */}
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
+                  <Route path="*" element={<PageLayout><NotFound /></PageLayout>} />
                 </Routes>
               </Suspense>
             </BrowserRouter>

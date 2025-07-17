@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useContent } from "@/contexts/ContentContext";
+import { Link } from "react-router-dom";
 
 interface HeroContent {
   title: string;
@@ -11,9 +12,9 @@ interface HeroContent {
 
 const Hero = () => {
   const [content, setContent] = useState<HeroContent>({
-    title: 'YOUR SUPPORT\nBUILDS FUTURES.\nEMPOWER\nCOMMUNITIES\nTODAY.',
-    subtitle: 'Join us in building resilient communities through sustainable development and humanitarian action.',
-    ctaText: 'DONATE & EMPOWER',
+    title: 'Sustainable Futures.',
+    subtitle: 'Together, we create lasting change in communities worldwide through sustainable development and humanitarian action. Your support helps us build resilient communities and transform lives.',
+    ctaText: 'GIVE NOW',
     imageUrl: 'https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?auto=format&fit=crop&w=1000&q=80',
   });
   const [loading, setLoading] = useState(true);
@@ -50,13 +51,6 @@ const Hero = () => {
       console.error('Hero: Unexpected error fetching content:', error);
     } finally {
       setLoading(false);
-    }
-  };
-
-  const scrollToNext = () => {
-    const nextSection = document.querySelector('#who-we-are');
-    if (nextSection) {
-      nextSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -133,12 +127,7 @@ const Hero = () => {
             fontWeight: '800'
           }}
         >
-          {content.title.split('\n').map((line, index) => (
-            <span key={index}>
-              {line}
-              {index < content.title.split('\n').length - 1 && <br />}
-            </span>
-          ))}
+          {content.title}
         </h1>
         <p 
           className="hero__subtitle"
@@ -150,11 +139,11 @@ const Hero = () => {
         >
           {content.subtitle}
         </p>
-        <a 
-          href="#donate" 
+        <Link 
+          to="/donate" 
           className="btn-primary"
           style={{
-            background: '#1e40af',
+            background: '#f97316',
             padding: '0.9rem 2.2rem',
             border: 'none',
             borderRadius: '4px',
@@ -164,23 +153,13 @@ const Hero = () => {
             textDecoration: 'none',
             cursor: 'pointer',
             display: 'inline-block',
-            transition: 'filter 0.2s ease'
+            transition: 'filter 0.2s ease',
+            textAlign: 'center',
+            width: 'fit-content'
           }}
         >
           {content.ctaText}
-        </a>
-        <div 
-          className="hero__chevron" 
-          onClick={scrollToNext} 
-          style={{ 
-            cursor: 'pointer',
-            marginTop: '3.5rem',
-            fontSize: '1.5rem',
-            color: '#ffffff'
-          }}
-        >
-          &#709;
-        </div>
+        </Link>
       </div>
 
       {/* Image on the right */}

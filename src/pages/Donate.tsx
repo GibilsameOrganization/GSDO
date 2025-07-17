@@ -1,6 +1,5 @@
 
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import DonationForm from "@/components/DonationForm";
 
 const Donate = () => {
@@ -69,8 +68,6 @@ const Donate = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

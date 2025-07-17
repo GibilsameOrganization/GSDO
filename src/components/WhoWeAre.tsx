@@ -61,6 +61,11 @@ const WhoWeAre = () => {
     }
   };
 
+  // Function to clean HTML tags from text
+  const cleanText = (text: string) => {
+    return text.replace(/<[^>]*>/g, '');
+  };
+
   if (loading) {
     return (
       <section className="py-20 bg-white">
@@ -90,7 +95,7 @@ const WhoWeAre = () => {
         {/* Header Section */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-gsdo-black mb-8">
-            {content.title}
+            {cleanText(content.title)}
           </h2>
         </div>
 
@@ -98,13 +103,13 @@ const WhoWeAre = () => {
         <div className="space-y-8">
           {/* Main Description */}
           <div className="text-left">
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6"
-               dangerouslySetInnerHTML={{ __html: content.description }}>
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed mb-6">
+              {cleanText(content.description)}
             </p>
             
             {/* Registration Info */}
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed"
-               dangerouslySetInnerHTML={{ __html: "We are officially registered with the <strong>Ministry of Planning and National Development of Somaliland</strong>, under Certificate No. L43.13.1787.2025M/J, issued on <strong>March 15th, 2025</strong>." }}>
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+              We are officially registered with the <strong>Ministry of Planning and National Development of Somaliland</strong>, under Certificate No. L43.13.1787.2025M/J, issued on <strong>March 15th, 2025</strong>.
             </p>
           </div>
 
@@ -113,16 +118,16 @@ const WhoWeAre = () => {
             {/* Mission */}
             <div className="bg-gray-50 rounded-lg p-6 border-l-4 border-royal-blue">
               <h3 className="text-xl font-bold text-gsdo-black mb-4">Our Mission</h3>
-              <p className="text-gray-700 leading-relaxed"
-                 dangerouslySetInnerHTML={{ __html: content.mission }}>
+              <p className="text-gray-700 leading-relaxed">
+                {cleanText(content.mission)}
               </p>
             </div>
 
             {/* Vision */}
             <div className="bg-gray-50 rounded-lg p-6 border-l-4 border-green-600">
               <h3 className="text-xl font-bold text-gsdo-black mb-4">Our Vision</h3>
-              <p className="text-gray-700 leading-relaxed"
-                 dangerouslySetInnerHTML={{ __html: content.vision }}>
+              <p className="text-gray-700 leading-relaxed">
+                {cleanText(content.vision)}
               </p>
             </div>
           </div>

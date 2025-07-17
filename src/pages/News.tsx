@@ -1,6 +1,5 @@
 
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import NewsSection from "@/components/NewsSection";
 
 const News = () => {
@@ -45,8 +44,6 @@ const News = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

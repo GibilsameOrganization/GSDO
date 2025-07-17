@@ -18,22 +18,22 @@ interface FourPillarsContent {
 const FourPillars = () => {
   const [pillars, setPillars] = useState<Pillar[]>([
     {
-      title: "We're efficient.",
-      description: "Your donation does more when you give it to GSDO. 90% of the money GSDO spends goes toward our sustainable development work that transforms communities.",
+      title: "WE ACT WITH INTEGRITY",
+      description: "We earn trust by operating with full transparency and accountability—ensuring every action reflects our values and ethical commitment to the communities we serve.",
       image: "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=400&q=60"
     },
     {
-      title: "We're far‑reaching.",
-      description: "We work across multiple continents, partnering with communities in over 25 countries to create lasting change.",
+      title: "WE'RE INCLUSIVE",
+      description: "We believe every voice matters. Our programs are designed to uplift marginalized groups, promote equality, and create space for all to participate and thrive.",
       image: "https://images.unsplash.com/photo-1524250609324-3030cdb213d3?auto=format&fit=crop&w=400&q=60"
     },
     {
-      title: "We're locally led.",
-      description: "Our approach is rooted in community‑driven development. We work directly with local communities, governments, and partner organizations to address root causes.",
+      title: "WE'RE EFFICIENT",
+      description: "Your donation does more when you give it to GSDO. 90% of the money GSDO spends goes toward our sustainable development work that transforms communities.",
       image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=400&q=60"
     },
     {
-      title: "We're trusted.",
+      title: "WE'RE TRUSTED",
       description: "With over 15 years of service, GSDO has built trust through sustainable development and advocacy for social equity.",
       image: "https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=400&q=60"
     }
@@ -72,6 +72,11 @@ const FourPillars = () => {
     }
   };
 
+  // Function to clean HTML tags from text
+  const cleanText = (text: string) => {
+    return text.replace(/<[^>]*>/g, '');
+  };
+
   if (loading) {
     return (
       <section 
@@ -86,15 +91,6 @@ const FourPillars = () => {
           margin: '0 auto',
           textAlign: 'center'
         }}>
-          <div className="animate-pulse" style={{
-            height: '48px',
-            background: '#e5e7eb',
-            borderRadius: '4px',
-            marginBottom: '3rem',
-            maxWidth: '600px',
-            marginLeft: 'auto',
-            marginRight: 'auto'
-          }}></div>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(2, 1fr)',
@@ -137,20 +133,6 @@ const FourPillars = () => {
         margin: '0 auto',
         textAlign: 'center'
       }}>
-        {/* Section Heading */}
-        <h2 style={{
-          fontSize: '2.5rem',
-          fontWeight: '700',
-          marginBottom: '3rem',
-          color: '#000000',
-          maxWidth: '800px',
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          lineHeight: '1.2'
-        }}>
-          people find the way to a better life worldwide.
-        </h2>
-
         {/* Four Pillars Grid */}
         <div style={{
           display: 'grid',
@@ -208,16 +190,16 @@ const FourPillars = () => {
                   textTransform: 'uppercase',
                   letterSpacing: '0.5px'
                 }}>
-                  {pillar.title}
+                  {cleanText(pillar.title)}
                 </h3>
-                <p style={{
+                <div style={{
                   fontSize: '0.9rem',
                   lineHeight: '1.5',
                   color: 'rgba(255, 255, 255, 0.9)',
                   margin: 0
                 }}>
-                  {pillar.description}
-                </p>
+                  {cleanText(pillar.description)}
+                </div>
               </div>
             </div>
           ))}

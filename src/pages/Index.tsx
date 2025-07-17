@@ -7,7 +7,8 @@ const Hero = React.lazy(() => import("@/components/Hero"));
 const ImpactMetrics = React.lazy(() => import("@/components/ImpactMetrics"));
 const FourPillars = React.lazy(() => import("@/components/FourPillars"));
 const FocusAreasSection = React.lazy(() => import("@/components/FocusAreasSection"));
-const NewsletterSignup = React.lazy(() => import("@/components/NewsletterSignup"));
+const MissionStatement = React.lazy(() => import("@/components/MissionStatement"));
+const NewsletterSection = React.lazy(() => import("@/components/NewsletterSection"));
 const StoriesSection = React.lazy(() => import("@/components/StoriesSection"));
 const FinalCTABanner = React.lazy(() => import("@/components/FinalCTABanner"));
 const CareFooter = React.lazy(() => import("@/components/CareFooter"));
@@ -37,32 +38,14 @@ const Index = () => {
         <FocusAreasSection />
       </LazySection>
       
-      {/* Newsletter Signup Section */}
+      {/* Mission Statement with Videos */}
+      <LazySection minHeight="600px">
+        <MissionStatement />
+      </LazySection>
+      
+      {/* Newsletter Section */}
       <LazySection minHeight="500px">
-        <section className="py-16 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              {/* Left Side - Newsletter Form */}
-              <div className="space-y-6">
-                <h2 className="text-3xl font-bold text-gray-800">Stay Connected</h2>
-                <p className="text-lg text-gray-600">
-                  Subscribe to our newsletter for the latest updates on our sustainable development work.
-                </p>
-                <NewsletterSignup variant="inline" />
-              </div>
-              
-              {/* Right Side - Image */}
-              <div className="relative">
-                <img
-                  src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=2070&auto=format&fit=crop"
-                  alt="Woman with children"
-                  className="w-full h-96 object-cover rounded-lg"
-                />
-                <div className="absolute -top-4 -right-4 w-32 h-32 bg-royal-blue rounded-full opacity-80"></div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <NewsletterSection />
       </LazySection>
       
       {/* Stories Section */}

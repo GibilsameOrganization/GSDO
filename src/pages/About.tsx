@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import { supabase } from "@/integrations/supabase/client";
 import { useContent } from "@/contexts/ContentContext";
 import WhoWeAre from "@/components/WhoWeAre";
@@ -193,8 +192,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

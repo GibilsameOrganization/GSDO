@@ -1,6 +1,5 @@
 
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import GetInvolvedSection from "@/components/GetInvolvedSection";
 
 const GetInvolved = () => {
@@ -79,8 +78,6 @@ const GetInvolved = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

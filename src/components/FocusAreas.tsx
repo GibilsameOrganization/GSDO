@@ -96,6 +96,11 @@ const FocusAreas = () => {
     }
   };
 
+  // Function to clean HTML tags from text
+  const cleanText = (text: string) => {
+    return text.replace(/<[^>]*>/g, '');
+  };
+
   if (loading) {
     return (
       <section className="py-16 bg-gray-50">
@@ -140,9 +145,9 @@ const FocusAreas = () => {
                 <div className={`w-12 h-12 rounded-lg ${area.color} flex items-center justify-center mb-4`}>
                   <IconComponent size={24} />
                 </div>
-                <h3 className="text-xl font-semibold text-gsdo-black mb-3">{area.title}</h3>
-                <p className="text-gray-600" 
-                   dangerouslySetInnerHTML={{ __html: area.description }}>
+                <h3 className="text-xl font-semibold text-gsdo-black mb-3">{cleanText(area.title)}</h3>
+                <p className="text-gray-600">
+                  {cleanText(area.description)}
                 </p>
               </div>
             );

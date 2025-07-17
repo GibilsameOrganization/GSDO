@@ -37,29 +37,30 @@ const CareFooter = () => {
             </Link>
           </div>
 
-          {/* Right Side - Navigation Links */}
-          <div className="grid grid-cols-2 gap-8">
+          {/* Right Side - Contact Information */}
+          <div className="grid grid-cols-1 gap-8">
+            {/* Contact Us */}
             <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2">
-                <li><Link to="/our-work" className="text-gray-300 hover:text-white transition-colors">Our Work</Link></li>
-                <li><Link to="/get-involved" className="text-gray-300 hover:text-white transition-colors">How to Help</Link></li>
-                <li><Link to="/donate" className="text-gray-300 hover:text-white transition-colors">Ways to Give</Link></li>
-                <li><Link to="/news" className="text-gray-300 hover:text-white transition-colors">News & Stories</Link></li>
-                <li><Link to="/about" className="text-gray-300 hover:text-white transition-colors">About Us</Link></li>
-                <li><Link to="/donate" className="text-gray-300 hover:text-white transition-colors">Donate</Link></li>
-              </ul>
+              <h4 className="font-semibold mb-4">Contact Us</h4>
+              <div className="space-y-2 text-gray-300">
+                <p>J957+WMM, ERG, SNG, SL</p>
+                <p>+252-637779273</p>
+                <p>+252-657043360</p>
+                <p className="font-medium">Gibilsame NGO</p>
+                <a href="mailto:info@gibilsame.org" className="text-royal-blue hover:text-blue-300 transition-colors">
+                  info@gibilsame.org
+                </a>
+              </div>
             </div>
+            
+            {/* Social Media */}
             <div>
-              <h4 className="font-semibold mb-4">More</h4>
-              <ul className="space-y-2">
-                <li><Link to="/careers" className="text-gray-300 hover:text-white transition-colors">Careers</Link></li>
-                <li><Link to="/partnerships" className="text-gray-300 hover:text-white transition-colors">Corporate Partnerships</Link></li>
-                <li><Link to="/reports" className="text-gray-300 hover:text-white transition-colors">Annual Reports</Link></li>
-                <li><Link to="/transparency" className="text-gray-300 hover:text-white transition-colors">Accountability & Transparency</Link></li>
-                <li><Link to="/financial" className="text-gray-300 hover:text-white transition-colors">Financial Responsibility</Link></li>
-                <li><Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact Us</Link></li>
-              </ul>
+              <h4 className="font-semibold mb-3">Follow Us</h4>
+              <div className="flex space-x-4">
+                <a href="#" className="text-gray-300 hover:text-royal-blue transition-colors">Facebook</a>
+                <a href="#" className="text-gray-300 hover:text-royal-blue transition-colors">Twitter</a>
+                <a href="#" className="text-gray-300 hover:text-royal-blue transition-colors">LinkedIn</a>
+              </div>
             </div>
           </div>
         </div>

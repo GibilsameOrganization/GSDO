@@ -1,5 +1,4 @@
 import Navigation from "@/components/Navigation";
-import Footer from "@/components/Footer";
 import ContactForm from "@/components/ContactForm";
 import NewsletterSignup from "@/components/NewsletterSignup";
 
@@ -74,8 +73,6 @@ const Contact = () => {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 };

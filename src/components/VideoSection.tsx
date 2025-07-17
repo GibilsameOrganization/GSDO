@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Play, Clock, Tag, ExternalLink } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import VideoPlayer from './VideoPlayer';
 import type { Database } from '@/integrations/supabase/types';
 
@@ -32,6 +33,7 @@ const VideoSection: React.FC<VideoSectionProps> = ({
   const [videos, setVideos] = useState<Video[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedVideo, setSelectedVideo] = useState<Video | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchVideos();
@@ -73,6 +75,10 @@ const VideoSection: React.FC<VideoSectionProps> = ({
 
   const handleVideoClick = (video: Video) => {
     setSelectedVideo(video);
+  };
+
+  const handleViewAllClick = () => {
+    navigate('/videos');
   };
 
   if (loading) {
@@ -321,7 +327,7 @@ const VideoSection: React.FC<VideoSectionProps> = ({
             <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-4">{description}</p>
           )}
           {showViewAll && (
-            <Button variant="outline" className="mt-4">
+            <Button variant="outline" className="mt-4" onClick={handleViewAllClick}>
               <ExternalLink className="h-4 w-4 mr-2" />
               View All Videos
             </Button>

@@ -258,6 +258,84 @@ export type Database = {
         }
         Relationships: []
       }
+      volunteer_opportunities: {
+        Row: {
+          id: string
+          title: string
+          description: string
+          location: string
+          duration: string
+          requirements: string | null
+          benefits: string | null
+          application_deadline: string | null
+          start_date: string | null
+          end_date: string | null
+          type: string
+          status: string
+          category: string | null
+          tags: string[] | null
+          contact_email: string | null
+          contact_phone: string | null
+          application_url: string | null
+          image_url: string | null
+          order_index: number | null
+          active: boolean | null
+          created_at: string | null
+          updated_at: string | null
+          created_by: string | null
+        }
+        Insert: {
+          id?: string
+          title: string
+          description: string
+          location: string
+          duration: string
+          requirements?: string | null
+          benefits?: string | null
+          application_deadline?: string | null
+          start_date?: string | null
+          end_date?: string | null
+          type?: string
+          status?: string
+          category?: string | null
+          tags?: string[] | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          application_url?: string | null
+          image_url?: string | null
+          order_index?: number | null
+          active?: boolean | null
+          created_at?: string | null
+          updated_at?: string | null
+          created_by?: string | null
+        }
+        Update: {
+          id?: string
+          title?: string
+          description?: string
+          location?: string
+          duration?: string
+          requirements?: string | null
+          benefits?: string | null
+          application_deadline?: string | null
+          start_date?: string | null
+          end_date?: string | null
+          type?: string
+          status?: string
+          category?: string | null
+          tags?: string[] | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          application_url?: string | null
+          image_url?: string | null
+          order_index?: number | null
+          active?: boolean | null
+          created_at?: string | null
+          updated_at?: string | null
+          created_by?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

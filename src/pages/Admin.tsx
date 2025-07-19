@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { LogOut, Users, FileText, BarChart3, Image, Globe, Camera, Target, BookOpen, Video } from 'lucide-react';
+import { LogOut, Users, FileText, BarChart3, Image, Globe, Camera, Target, BookOpen, Video, Heart } from 'lucide-react';
 import HeroSlidesManager from '@/components/admin/HeroSlidesManager';
 import NewsManager from '@/components/admin/NewsManager';
 import ImpactMetricsManager from '@/components/admin/ImpactMetricsManager';
@@ -14,6 +14,7 @@ import PhotoManager from '@/components/admin/PhotoManager';
 import FocusAreasManager from '@/components/admin/FocusAreasManager';
 import AboutManager from '@/components/admin/AboutManager';
 import VideoManager from '@/components/admin/VideoManager';
+import VolunteerOpportunitiesManager from '@/components/admin/VolunteerOpportunitiesManager';
 
 const Admin = () => {
   const { user, signOut } = useAuth();
@@ -103,6 +104,10 @@ const Admin = () => {
                 <Video className="h-3 w-3" />
                 <span>Videos</span>
               </TabsTrigger>
+              <TabsTrigger value="opportunities" className="flex items-center space-x-1 text-xs px-3 py-2 whitespace-nowrap">
+                <Heart className="h-3 w-3" />
+                <span>Volunteer Opportunities</span>
+              </TabsTrigger>
             </TabsList>
           </div>
 
@@ -140,6 +145,10 @@ const Admin = () => {
 
           <TabsContent value="videos">
             <VideoManager />
+          </TabsContent>
+
+          <TabsContent value="opportunities">
+            <VolunteerOpportunitiesManager />
           </TabsContent>
         </Tabs>
       </main>

@@ -25,6 +25,7 @@ const Admin = React.lazy(() => import("./pages/Admin"));
 const NotFound = React.lazy(() => import("./pages/NotFound"));
 const NewsArticle = React.lazy(() => import("./pages/NewsArticle"));
 const StoryDetail = React.lazy(() => import("./pages/StoryDetail"));
+const VolunteerOpportunityDetail = React.lazy(() => import("./pages/VolunteerOpportunityDetail"));
 
 const queryClient = new QueryClient();
 
@@ -53,6 +54,7 @@ const App = () => (
                   <Route path="/news" element={<PageLayout><News /></PageLayout>} />
                   <Route path="/news/:id" element={<PageLayout><NewsArticle /></PageLayout>} />
                   <Route path="/stories/:id" element={<PageLayout><StoryDetail /></PageLayout>} />
+                  <Route path="/opportunities/:id" element={<PageLayout><VolunteerOpportunityDetail /></PageLayout>} />
                   <Route path="/contact" element={<PageLayout><Contact /></PageLayout>} />
                   <Route path="/donate" element={<PageLayout><Donate /></PageLayout>} />
                   <Route path="/donation-confirmation" element={<PageLayout><DonationConfirmation /></PageLayout>} />

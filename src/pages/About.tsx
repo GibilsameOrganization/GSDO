@@ -142,34 +142,7 @@ const About = () => {
                 ))}
               </div>
 
-              {/* Story Footer */}
-              <div className="mt-12 pt-8 border-t border-gray-100">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-royal-blue to-blue-600 rounded-xl flex items-center justify-center">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-royal-blue">Established 2009</p>
-                      <p className="text-xs text-gray-500">Over 15 years of impact</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-gradient-to-br from-green-500 to-emerald-600 rounded-xl flex items-center justify-center">
-                      <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5a2 2 0 002 2h1a2 2 0 002-2V3.935M8 3.935V3a2 2 0 012-2h1a2 2 0 012 2v.935M8 3.935V5a2 2 0 002 2h1a2 2 0 002-2V3.935" />
-                      </svg>
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-green-600">25+ Countries</p>
-                      <p className="text-xs text-gray-500">Global reach</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>
